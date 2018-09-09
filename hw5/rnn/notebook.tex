@@ -1,0 +1,2140 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ZihaoWang\_hw5\_p3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    Reference: I cooperated with Xinyu Wei on this homeowrk
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{k+kn}{import} \PY{n+nn}{os}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{collections}
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{k+kn}{import} \PY{n+nn}{argparse}
+         \PY{k+kn}{import} \PY{n+nn}{tensorflow} \PY{k}{as} \PY{n+nn}{tf}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{parser} \PY{o}{=} \PY{n}{argparse}\PY{o}{.}\PY{n}{ArgumentParser}\PY{p}{(}\PY{p}{)}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}data\PYZus{}dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}save\PYZus{}dir}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Dimension of hidden layer variables h and c}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}num\PYZus{}units}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{128}\PY{o}{*}\PY{l+m+mi}{2}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}parser.add\PYZus{}argument(\PYZsq{}\PYZhy{}\PYZhy{}num\PYZus{}units\PYZsq{}, default=128*2*2)}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}batch\PYZus{}size}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Number of steps in each batch for training}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}num\PYZus{}steps}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{75}\PY{p}{)}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}num\PYZus{}epochs}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Time step}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}lr}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{default}\PY{o}{=}\PY{l+m+mf}{0.002}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{} Number of possible inputs/outputs }
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}num\PYZus{}chars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{parser}\PY{o}{.}\PY{n}{add\PYZus{}argument}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}\PYZhy{}num\PYZus{}batches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{default}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+         \PY{n}{args}\PY{p}{,} \PY{n}{unparsed} \PY{o}{=} \PY{n}{parser}\PY{o}{.}\PY{n}{parse\PYZus{}known\PYZus{}args}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{k}{def} \PY{n+nf}{timer}\PY{p}{(}\PY{n}{start}\PY{p}{,} \PY{n}{end}\PY{p}{)}\PY{p}{:}
+            \PY{n}{hrs}\PY{p}{,} \PY{n}{rem} \PY{o}{=} \PY{n+nb}{divmod}\PY{p}{(}\PY{n}{end}\PY{o}{\PYZhy{}}\PY{n}{start}\PY{p}{,} \PY{l+m+mi}{3600}\PY{p}{)}
+            \PY{n}{mins}\PY{p}{,} \PY{n}{secs} \PY{o}{=} \PY{n+nb}{divmod}\PY{p}{(}\PY{n}{rem}\PY{p}{,} \PY{l+m+mi}{60}\PY{p}{)}
+            \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+si}{\PYZob{}:0\PYZgt{}2\PYZcb{}}\PY{l+s+s1}{ hours }\PY{l+s+si}{\PYZob{}:0\PYZgt{}2\PYZcb{}}\PY{l+s+s1}{ minutes }\PY{l+s+si}{\PYZob{}:05.2f\PYZcb{}}\PY{l+s+s1}{ seconds}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n+nb}{int}\PY{p}{(}\PY{n}{hrs}\PY{p}{)}\PY{p}{,} \PY{n+nb}{int}\PY{p}{(}\PY{n}{mins}\PY{p}{)}\PY{p}{,} \PY{n}{secs}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{class} \PY{n+nc}{TextLoader}\PY{p}{(}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{64}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{utf\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{data\PYZus{}dir} \PY{o}{=} \PY{n}{data\PYZus{}dir}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{encoding} \PY{o}{=} \PY{n}{encoding}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{n}{batch\PYZus{}size}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{seq\PYZus{}length} \PY{o}{=} \PY{n}{seq\PYZus{}length}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tinyshakespeare.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{vocab.pkl}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Numeric file of characters translated to indices.}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file} \PY{o}{=} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{data.npy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                
+                \PY{k}{if} \PY{o+ow}{not} \PY{p}{(}\PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file}\PY{p}{)} \PY{o+ow}{and} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{it seems we havent processed the text data yet: reading the shakespear}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{preprocess}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}file}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file}\PY{p}{)}
+                \PY{k}{else}\PY{p}{:}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{there are preprocessed data \PYZhy{} lets load it}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{load\PYZus{}preprocessed}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{create\PYZus{}batches}\PY{p}{(}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{reset\PYZus{}batch\PYZus{}pointer}\PY{p}{(}\PY{p}{)}
+        
+            \PY{c+c1}{\PYZsh{} Create numeric file.}
+            \PY{k}{def} \PY{n+nf}{preprocess}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{input\PYZus{}file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{vocab\PYZus{}file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{tensor\PYZus{}file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{saveit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{input\PYZus{}file} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}file} \PY{o}{=} \PY{n}{input\PYZus{}file}
+                \PY{k}{if} \PY{n}{vocab\PYZus{}file} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file} \PY{o}{=} \PY{n}{vocab\PYZus{}file}
+                \PY{k}{if} \PY{n}{tensor\PYZus{}file} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file} \PY{o}{=} \PY{n}{tensor\PYZus{}file}
+        
+                \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{input\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{r}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                    \PY{n}{data} \PY{o}{=} \PY{n}{f}\PY{o}{.}\PY{n}{read}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}data = data.lower()}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{total\PYZus{}length} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                \PY{n}{counter} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{Counter}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+                \PY{n}{count\PYZus{}pairs} \PY{o}{=} \PY{n+nb}{sorted}\PY{p}{(}\PY{n}{counter}\PY{o}{.}\PY{n}{items}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{key}\PY{o}{=}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{n}{x}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n+nb}{zip}\PY{p}{(}\PY{o}{*}\PY{n}{count\PYZus{}pairs}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{idx\PYZus{}to\PYZus{}vocab} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+        
+                \PY{k}{if} \PY{n}{saveit}\PY{p}{:}
+                    \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}  \PY{c+c1}{\PYZsh{} saving dictionary so we don\PYZsq{}t compute it again}
+                        \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{,} \PY{n}{f}\PY{p}{)}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{get}\PY{p}{,} \PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                    \PY{n}{np}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor}\PY{p}{)}  \PY{c+c1}{\PYZsh{} saving the numerified data}
+            \PY{c+c1}{\PYZsh{} Load numeric file create dictionaries for char2idx and back}
+            \PY{k}{def} \PY{n+nf}{load\PYZus{}preprocessed}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{vocab\PYZus{}file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{,} \PY{n}{tensor\PYZus{}file}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{vocab\PYZus{}file} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file} \PY{o}{=} \PY{n}{vocab\PYZus{}file}
+                \PY{k}{if} \PY{n}{tensor\PYZus{}file} \PY{o+ow}{is} \PY{o+ow}{not} \PY{k+kc}{None}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor\PYZus{}file} \PY{o}{=} \PY{n}{tensor\PYZus{}file}
+        
+                \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}file}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{f}\PY{p}{:}
+                    \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars} \PY{o}{=} \PY{n}{pickle}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{f}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} attributes}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}size} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}size}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{,} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{chars}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{idx\PYZus{}to\PYZus{}vocab} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{n+nb}{zip}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{values}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{tensor\PYZus{}file}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor}\PY{o}{.}\PY{n}{size} \PY{o}{/} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{seq\PYZus{}length}\PY{p}{)}\PY{p}{)}
+                    
+            \PY{c+c1}{\PYZsh{} tensor size = the length of the entire data sequence}
+            \PY{c+c1}{\PYZsh{} divide into batch\PYZus{}size sub sequences and stack}
+            \PY{c+c1}{\PYZsh{} cut those by seq\PYZus{}length to produce batches of [batch size, seq\PYZus{}length] sized examples}
+            \PY{k}{def} \PY{n+nf}{create\PYZus{}batches}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+        
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor}\PY{o}{.}\PY{n}{size} \PY{o}{/} \PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{seq\PYZus{}length}\PY{p}{)}\PY{p}{)}
+        
+                \PY{k}{if} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{k}{assert} \PY{k+kc}{False}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Not enough data. Make seq\PYZus{}length and/or batch\PYZus{}size smaller}\PY{l+s+s1}{\PYZsq{}}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor}\PY{p}{[}\PY{p}{:}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{seq\PYZus{}length}\PY{p}{]}  \PY{c+c1}{\PYZsh{} so we get an even divide}
+                \PY{n}{xdata} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor}
+                \PY{n}{ydata} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{tensor}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} ydata is one step ahead of x and last item is first item of x }
+                \PY{c+c1}{\PYZsh{} to get sequences of same length    }
+                \PY{n}{ydata}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{xdata}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{:}\PY{p}{]} 
+                \PY{n}{ydata}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{=} \PY{n}{xdata}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}batches} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{xdata}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y\PYZus{}batches} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{ydata}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{int32}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches}\PY{o}{*}\PY{o}{.}\PY{l+m+mi}{8}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{test\PYZus{}num\PYZus{}batches}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{num\PYZus{}batches}\PY{o}{\PYZhy{}}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}x\PYZus{}batches}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}batches}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}y\PYZus{}batches}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y\PYZus{}batches}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{:}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{test\PYZus{}x\PYZus{}batches}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{x\PYZus{}batches}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}\PY{p}{:}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{test\PYZus{}y\PYZus{}batches}\PY{o}{=}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{y\PYZus{}batches}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}\PY{p}{:}\PY{p}{]}
+        
+                \PY{c+c1}{\PYZsh{} xdata: L length}
+                \PY{c+c1}{\PYZsh{} xdata reshaped: batch\PYZus{}size, (L/batch\PYZus{}size) length following natural indexing}
+                \PY{c+c1}{\PYZsh{} np.split: into num batches batches along the width(sentence)}
+        
+            \PY{k}{def} \PY{n+nf}{next\PYZus{}batch\PYZus{}train}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}x\PYZus{}batches}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{train\PYZus{}y\PYZus{}batches}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{return} \PY{n}{x}\PY{p}{,}\PY{n}{y}
+            
+            \PY{k}{def} \PY{n+nf}{next\PYZus{}batch\PYZus{}test}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{test\PYZus{}x\PYZus{}batches}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer}\PY{p}{]}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{test\PYZus{}y\PYZus{}batches}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer}\PY{p}{]}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                \PY{k}{return} \PY{n}{x}\PY{p}{,}\PY{n}{y}
+        
+            \PY{k}{def} \PY{n+nf}{reset\PYZus{}batch\PYZus{}pointer}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pointer} \PY{o}{=} \PY{l+m+mi}{0}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{loader} \PY{o}{=} \PY{n}{TextLoader}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{o}{=}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{)}
+         \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}chars} \PY{o}{=} \PY{n}{loader}\PY{o}{.}\PY{n}{vocab\PYZus{}size}
+         \PY{c+c1}{\PYZsh{}print(loader.vocab\PYZus{}size)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num chars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}chars}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num batches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{loader}\PY{o}{.}\PY{n}{num\PYZus{}batches}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+num chars 65
+num batches 232
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{class} \PY{n+nc}{MyBasicRNNCell}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicRNNCell}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel\PYZus{}hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias\PYZus{}hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+        
+            \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}Most basic RNN: output = new\PYZus{}state = act(W * input + U * state + B).\PYZdq{}\PYZdq{}\PYZdq{}}
+                
+                \PY{n}{output} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}\PY{p}{)}
+        
+                \PY{k}{return} \PY{n}{output}\PY{p}{,} \PY{n}{output}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k}{class} \PY{n+nc}{MyBasicRNNCell\PYZus{}layer2}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicRNNCell}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel\PYZus{}hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias\PYZus{}hidden}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+        
+            \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+                \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{} RNN with two different layers: draw a random number p; }
+        \PY{l+s+sd}{            output = tanh(p*weight1) + tanh((1\PYZhy{}p)*weight2)\PYZdq{}\PYZdq{}\PYZdq{}}
+                \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                
+                \PY{n}{weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+                
+                \PY{n}{weight1}\PY{p}{,}\PY{n}{weight2} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}
+                    \PY{n}{value}\PY{o}{=}\PY{n}{weights}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+                
+                \PY{n}{rand} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{random\PYZus{}uniform}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,}\PY{n}{minval}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{,}\PY{n}{maxval}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{dtype}\PY{o}{=}\PY{n}{weight1}\PY{o}{.}\PY{n}{dtype}\PY{p}{,} \PY{n}{seed} \PY{o}{=} \PY{l+m+mi}{12345}\PY{p}{)}
+                
+                \PY{n}{output} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{rand}\PY{o}{*}\PY{n}{weight2}\PY{p}{)}\PY{o}{+}\PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{rand}\PY{p}{)}\PY{o}{*}\PY{n}{weight1}\PY{p}{)}
+                
+                
+                \PY{k}{return} \PY{n}{output}\PY{p}{,} \PY{n}{output}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{LSTMStateTuple} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LSTMStateTuple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{class} \PY{n+nc}{MyBasicLSTMCell}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicLSTMCell}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+        
+            \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{state}
+        
+                \PY{n}{gate\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+        
+                \PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{input\PYZus{}weights}\PY{p}{,} \PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{output\PYZus{}gate\PYZus{}weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}
+                    \PY{n}{value}\PY{o}{=}\PY{n}{gate\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} forget gating}
+                \PY{n}{forget\PYZus{}bias\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                \PY{n}{forget\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{forget\PYZus{}gate\PYZus{}weights} \PY{o}{+} \PY{n}{forget\PYZus{}bias\PYZus{}tensor}\PY{p}{)}
+                \PY{n}{gated\PYZus{}memory} \PY{o}{=} \PY{n}{c} \PY{o}{*} \PY{n}{forget\PYZus{}gate}
+        
+                \PY{c+c1}{\PYZsh{} input gating}
+                \PY{n}{processed\PYZus{}new\PYZus{}input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{input\PYZus{}weights}\PY{p}{)}
+                \PY{n}{input\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                \PY{n}{gated\PYZus{}input} \PY{o}{=} \PY{n}{input\PYZus{}gate} \PY{o}{*} \PY{n}{processed\PYZus{}new\PYZus{}input}
+        
+                \PY{c+c1}{\PYZsh{} updating memory}
+                \PY{n}{new\PYZus{}c} \PY{o}{=} \PY{n}{gated\PYZus{}memory} \PY{o}{+} \PY{n}{gated\PYZus{}input}
+        
+                \PY{c+c1}{\PYZsh{} output gating}
+                \PY{n}{processed\PYZus{}memory} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{)}
+                \PY{n}{output\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{output\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                \PY{n}{new\PYZus{}h} \PY{o}{=} \PY{n}{processed\PYZus{}memory} \PY{o}{*} \PY{n}{output\PYZus{}gate}
+        
+                \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{rnn\PYZus{}cell}\PY{o}{.}\PY{n}{LSTMStateTuple}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{,} \PY{n}{new\PYZus{}h}\PY{p}{)}
+        
+                \PY{k}{return} \PY{n}{new\PYZus{}h}\PY{p}{,} \PY{n}{new\PYZus{}state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{LSTMStateTuple} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LSTMStateTuple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{class} \PY{n+nc}{MyBasicLSTMCell\PYZus{}cp\PYZus{}gates}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicLSTMCell}\PY{p}{)}\PY{p}{:}
+        
+            \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        
+                \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+        
+            \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+        
+                \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{state}
+        
+                \PY{n}{gate\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+        
+                \PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{input\PYZus{}weights}\PY{p}{,} \PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{output\PYZus{}gate\PYZus{}weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}
+                    \PY{n}{value}\PY{o}{=}\PY{n}{gate\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+        
+                \PY{c+c1}{\PYZsh{} forget gating}
+                \PY{n}{forget\PYZus{}bias\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                \PY{n}{forget\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{forget\PYZus{}gate\PYZus{}weights} \PY{o}{+} \PY{n}{forget\PYZus{}bias\PYZus{}tensor}\PY{p}{)}
+                \PY{n}{gated\PYZus{}memory} \PY{o}{=} \PY{n}{c} \PY{o}{*} \PY{n}{forget\PYZus{}gate}
+        
+                \PY{c+c1}{\PYZsh{} input gating}
+                \PY{n}{processed\PYZus{}new\PYZus{}input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{input\PYZus{}weights}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{}input\PYZus{}gate = tf.sigmoid(input\PYZus{}gate\PYZus{}weights)}
+                \PY{n}{input\PYZus{}gate} \PY{o}{=} \PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{forget\PYZus{}gate}
+                \PY{n}{gated\PYZus{}input} \PY{o}{=} \PY{n}{input\PYZus{}gate} \PY{o}{*} \PY{n}{processed\PYZus{}new\PYZus{}input}
+        
+                \PY{c+c1}{\PYZsh{} updating memory}
+                \PY{n}{new\PYZus{}c} \PY{o}{=} \PY{n}{gated\PYZus{}memory} \PY{o}{+} \PY{n}{gated\PYZus{}input}
+        
+                \PY{c+c1}{\PYZsh{} output gating}
+                \PY{n}{processed\PYZus{}memory} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{)}
+                \PY{n}{output\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{output\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                \PY{n}{new\PYZus{}h} \PY{o}{=} \PY{n}{processed\PYZus{}memory} \PY{o}{*} \PY{n}{output\PYZus{}gate}
+        
+                \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{rnn\PYZus{}cell}\PY{o}{.}\PY{n}{LSTMStateTuple}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{,} \PY{n}{new\PYZus{}h}\PY{p}{)}
+        
+                \PY{k}{return} \PY{n}{new\PYZus{}h}\PY{p}{,} \PY{n}{new\PYZus{}state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{LSTMStateTuple} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LSTMStateTuple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{class} \PY{n+nc}{MyBasicLSTMCell\PYZus{}GS\PYZus{}var}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicLSTMCell}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+         
+             \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                 \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{state}
+         
+                 \PY{n}{gate\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{,} \PY{n}{c}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+         
+                 \PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{input\PYZus{}weights}\PY{p}{,} \PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{output\PYZus{}gate\PYZus{}weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}
+                     \PY{n}{value}\PY{o}{=}\PY{n}{gate\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} forget gating}
+                 \PY{n}{forget\PYZus{}bias\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                 \PY{n}{forget\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{forget\PYZus{}gate\PYZus{}weights} \PY{o}{+} \PY{n}{forget\PYZus{}bias\PYZus{}tensor}\PY{p}{)}
+                 \PY{n}{gated\PYZus{}memory} \PY{o}{=} \PY{n}{c} \PY{o}{*} \PY{n}{forget\PYZus{}gate}
+         
+                 \PY{c+c1}{\PYZsh{} input gating}
+                 \PY{n}{processed\PYZus{}new\PYZus{}input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{input\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{input\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{gated\PYZus{}input} \PY{o}{=} \PY{n}{input\PYZus{}gate} \PY{o}{*} \PY{n}{processed\PYZus{}new\PYZus{}input}
+         
+                 \PY{c+c1}{\PYZsh{} updating memory}
+                 \PY{n}{new\PYZus{}c} \PY{o}{=} \PY{n}{gated\PYZus{}memory} \PY{o}{+} \PY{n}{gated\PYZus{}input}
+         
+                 \PY{c+c1}{\PYZsh{} output gating}
+                 \PY{n}{processed\PYZus{}memory} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{)}
+                 \PY{n}{output\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{output\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{new\PYZus{}h} \PY{o}{=} \PY{n}{processed\PYZus{}memory} \PY{o}{*} \PY{n}{output\PYZus{}gate}
+         
+                 \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{rnn\PYZus{}cell}\PY{o}{.}\PY{n}{LSTMStateTuple}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{,} \PY{n}{new\PYZus{}h}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}h}\PY{p}{,} \PY{n}{new\PYZus{}state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{LSTMStateTuple} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LSTMStateTuple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{class} \PY{n+nc}{MyBasicLSTMCell\PYZus{}wo\PYZus{}outputgate}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicLSTMCell}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{4} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+         
+             \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                 \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{state}
+         
+                 \PY{n}{gate\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+         
+                 \PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{input\PYZus{}weights}\PY{p}{,} \PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{output\PYZus{}gate\PYZus{}weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}
+                     \PY{n}{value}\PY{o}{=}\PY{n}{gate\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} forget gating}
+                 \PY{n}{forget\PYZus{}bias\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                 \PY{n}{forget\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{forget\PYZus{}gate\PYZus{}weights} \PY{o}{+} \PY{n}{forget\PYZus{}bias\PYZus{}tensor}\PY{p}{)}
+                 \PY{n}{gated\PYZus{}memory} \PY{o}{=} \PY{n}{c} \PY{o}{*} \PY{n}{forget\PYZus{}gate}
+         
+                 \PY{c+c1}{\PYZsh{} input gating}
+                 \PY{n}{processed\PYZus{}new\PYZus{}input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{input\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{input\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{gated\PYZus{}input} \PY{o}{=} \PY{n}{input\PYZus{}gate} \PY{o}{*} \PY{n}{processed\PYZus{}new\PYZus{}input}
+         
+                 \PY{c+c1}{\PYZsh{} updating memory}
+                 \PY{n}{new\PYZus{}c} \PY{o}{=} \PY{n}{gated\PYZus{}memory} \PY{o}{+} \PY{n}{gated\PYZus{}input}
+         
+                 \PY{c+c1}{\PYZsh{} output gating}
+                 \PY{c+c1}{\PYZsh{}processed\PYZus{}memory = tf.tanh(new\PYZus{}c)}
+                 \PY{n}{output\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{output\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{new\PYZus{}h} \PY{o}{=} \PY{n}{output\PYZus{}gate}
+                 
+                 \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{rnn\PYZus{}cell}\PY{o}{.}\PY{n}{LSTMStateTuple}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{,} \PY{n}{new\PYZus{}h}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}h}\PY{p}{,} \PY{n}{new\PYZus{}state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{LSTMStateTuple} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LSTMStateTuple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{class} \PY{n+nc}{MyBasicLSTMCell\PYZus{}GS}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicLSTMCell}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel3} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{l+m+mi}{2}\PY{o}{*}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias3} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+         
+             \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                 \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{state}
+         
+                 \PY{n}{gate\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{,}\PY{n}{c}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+         
+                 \PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{p}{,} \PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}
+                     \PY{n}{value}\PY{o}{=}\PY{n}{gate\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{}, forget\PYZus{}gate\PYZus{}weights, output\PYZus{}gate\PYZus{}weights }
+                 
+                 
+                 \PY{c+c1}{\PYZsh{} forget gating}
+                 \PY{n}{forget\PYZus{}bias\PYZus{}tensor} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mf}{1.0}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{forget\PYZus{}gate\PYZus{}weights}\PY{o}{.}\PY{n}{dtype}\PY{p}{)}
+                 \PY{n}{forget\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{forget\PYZus{}gate\PYZus{}weights} \PY{o}{+} \PY{n}{forget\PYZus{}bias\PYZus{}tensor}\PY{p}{)}
+                 \PY{n}{gated\PYZus{}memory} \PY{o}{=} \PY{n}{c} \PY{o}{*} \PY{n}{forget\PYZus{}gate}
+         
+                 \PY{c+c1}{\PYZsh{} input gating}
+                 \PY{n}{processed\PYZus{}new\PYZus{}input} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{inputs}\PY{p}{,}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel2}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias2}       
+                 \PY{n}{input\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{input\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{gated\PYZus{}input} \PY{o}{=} \PY{n}{input\PYZus{}gate} \PY{o}{*} \PY{n}{processed\PYZus{}new\PYZus{}input}
+         
+                 \PY{c+c1}{\PYZsh{} updating memory}
+                 \PY{n}{new\PYZus{}c} \PY{o}{=} \PY{n}{gated\PYZus{}memory} \PY{o}{+} \PY{n}{gated\PYZus{}input}
+         
+                 \PY{c+c1}{\PYZsh{} output gating}
+                 \PY{n}{processed\PYZus{}memory} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{)}
+                 
+                 \PY{n}{output\PYZus{}gate\PYZus{}weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{,}\PY{n}{new\PYZus{}c}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel3}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias3}
+                 \PY{n}{output\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{output\PYZus{}gate\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{new\PYZus{}h} \PY{o}{=} \PY{n}{processed\PYZus{}memory} \PY{o}{*} \PY{n}{output\PYZus{}gate}
+         
+                 \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{rnn\PYZus{}cell}\PY{o}{.}\PY{n}{LSTMStateTuple}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{,} \PY{n}{new\PYZus{}h}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}h}\PY{p}{,} \PY{n}{new\PYZus{}state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{LSTMStateTuple} \PY{o}{=} \PY{n}{collections}\PY{o}{.}\PY{n}{namedtuple}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{LSTMStateTuple}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{c}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{h}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{class} \PY{n+nc}{MyBasicLSTMCell\PYZus{}GRU}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{contrib}\PY{o}{.}\PY{n}{rnn}\PY{o}{.}\PY{n}{BasicLSTMCell}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{def} \PY{n+nf}{build}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs\PYZus{}shape}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{input\PYZus{}depth} \PY{o}{=} \PY{n}{inputs\PYZus{}shape}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{value}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{l+m+mi}{2} \PY{o}{*} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{kernel2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n}{input\PYZus{}depth} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias2} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{add\PYZus{}variable}\PY{p}{(}\PY{n}{name}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{bias2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{shape}\PY{o}{=}\PY{p}{[}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}num\PYZus{}units}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{zeros\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+         
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{built} \PY{o}{=} \PY{k+kc}{True}
+         
+             \PY{k}{def} \PY{n+nf}{call}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{inputs}\PY{p}{,} \PY{n}{state}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{one} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{constant}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{)}
+                 \PY{n}{c}\PY{p}{,} \PY{n}{h} \PY{o}{=} \PY{n}{state}
+                 \PY{n}{c} \PY{o}{=} \PY{n}{h}
+                 
+                 \PY{n}{gate\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{h}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias}
+         
+                 \PY{n}{z\PYZus{}weights}\PY{p}{,} \PY{n}{r\PYZus{}weights} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{n}{value}\PY{o}{=}\PY{n}{gate\PYZus{}inputs}\PY{p}{,} \PY{n}{num\PYZus{}or\PYZus{}size\PYZus{}splits}\PY{o}{=}\PY{l+m+mi}{2}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{n}{one}\PY{p}{)}
+                 \PY{n}{z\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{z\PYZus{}weights}\PY{p}{)}
+                 \PY{n}{r\PYZus{}gate} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{sigmoid}\PY{p}{(}\PY{n}{r\PYZus{}weights}\PY{p}{)}
+                 
+                 \PY{n}{h\PYZus{}tear} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{tanh}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{inputs}\PY{p}{,} \PY{n}{r\PYZus{}gate}\PY{o}{*}\PY{n}{c}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}kernel2}\PY{p}{)} \PY{o}{+} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{\PYZus{}bias2}\PY{p}{)}
+                 
+                 
+                 \PY{n}{new\PYZus{}h} \PY{o}{=} \PY{p}{(}\PY{l+m+mi}{1}\PY{o}{\PYZhy{}}\PY{n}{z\PYZus{}gate}\PY{p}{)} \PY{o}{*} \PY{n}{h} \PY{o}{+} \PY{n}{z\PYZus{}gate}\PY{o}{*}\PY{n}{h\PYZus{}tear}
+                 \PY{n}{new\PYZus{}c} \PY{o}{=} \PY{n}{new\PYZus{}h}
+                 
+                 \PY{n}{new\PYZus{}state} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{rnn\PYZus{}cell}\PY{o}{.}\PY{n}{LSTMStateTuple}\PY{p}{(}\PY{n}{new\PYZus{}c}\PY{p}{,} \PY{n}{new\PYZus{}h}\PY{p}{)}
+         
+                 \PY{k}{return} \PY{n}{new\PYZus{}h}\PY{p}{,} \PY{n}{new\PYZus{}state}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{k}{def} \PY{n+nf}{network}\PY{p}{(}\PY{n}{myLSTMCell}\PY{p}{,}\PY{n}{inputs}\PY{p}{,}\PY{n}{targets}\PY{p}{)}\PY{p}{:}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{embedding\PYZus{}matrix}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{embedding} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{embedding}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}chars}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{embedded\PYZus{}inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{embedding\PYZus{}lookup}\PY{p}{(}\PY{n}{embedding}\PY{p}{,} \PY{n}{inputs}\PY{p}{)}
+                 \PY{n}{inputs\PYZus{}list} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{unstack}\PY{p}{(}\PY{n}{embedded\PYZus{}inputs}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}  \PY{c+c1}{\PYZsh{} shape: a list of [batch\PYZus{}size, num\PYZus{}units] length num\PYZus{}steps}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{LSTMCell}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{myscope}\PY{p}{:}
+                 \PY{n}{cell} \PY{o}{=} \PY{n}{myLSTMCell}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}units}\PY{p}{)}
+                 \PY{n}{init\PYZus{}state} \PY{o}{=} \PY{n}{cell}\PY{o}{.}\PY{n}{zero\PYZus{}state}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{tf}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+                 \PY{n}{state} \PY{o}{=} \PY{n}{init\PYZus{}state}
+                 \PY{n}{outputs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+                 \PY{k}{for} \PY{n}{time\PYZus{}}\PY{p}{,} \PY{n+nb}{input} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{inputs\PYZus{}list}\PY{p}{)}\PY{p}{:}
+                     \PY{k}{if} \PY{n}{time\PYZus{}} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n}{myscope}\PY{o}{.}\PY{n}{reuse\PYZus{}variables}\PY{p}{(}\PY{p}{)}
+                    
+                     \PY{n}{output}\PY{p}{,} \PY{n}{state} \PY{o}{=} \PY{n}{cell}\PY{p}{(}\PY{n+nb}{input}\PY{p}{,} \PY{n}{state}\PY{p}{)}
+                     \PY{n}{outputs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} All hidden outputs for each batch and every step in the batch are reshaped}
+             \PY{c+c1}{\PYZsh{} as one long matrix to be transformed to logits and compared to targets.}
+                 \PY{n}{output\PYZus{}reshaped} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}units}\PY{p}{]}\PY{p}{)}
+         
+                 \PY{n}{final\PYZus{}state} \PY{o}{=} \PY{n}{state}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{regression}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{W} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{W}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}units}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}chars}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{b} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{get\PYZus{}variable}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{b}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}chars}\PY{p}{]}\PY{p}{,} \PY{n}{initializer}\PY{o}{=}\PY{n}{tf}\PY{o}{.}\PY{n}{constant\PYZus{}initializer}\PY{p}{(}\PY{l+m+mf}{0.0}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{logits} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{matmul}\PY{p}{(}\PY{n}{output\PYZus{}reshaped}\PY{p}{,} \PY{n}{W}\PY{p}{)} \PY{o}{+} \PY{n}{b}
+                 \PY{n}{prob} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{softmax}\PY{p}{(}\PY{n}{logits}\PY{p}{)}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cost}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{targets\PYZus{}straightened} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{targets}\PY{p}{,} \PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{crossentropy} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{nn}\PY{o}{.}\PY{n}{sparse\PYZus{}softmax\PYZus{}cross\PYZus{}entropy\PYZus{}with\PYZus{}logits}\PY{p}{(}\PY{n}{logits}\PY{o}{=}\PY{n}{logits}\PY{p}{,} 
+                                                             \PY{n}{labels}\PY{o}{=}\PY{n}{targets\PYZus{}straightened}\PY{p}{)}
+                 \PY{n}{loss} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{reduce\PYZus{}mean}\PY{p}{(}\PY{n}{crossentropy}\PY{p}{)}
+                 \PY{n}{cost} \PY{o}{=} \PY{n}{loss}\PY{o}{/}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{o}{/}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{optimizer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{train\PYZus{}step} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{AdamOptimizer}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{lr}\PY{p}{)}\PY{o}{.}\PY{n}{minimize}\PY{p}{(}\PY{n}{loss}\PY{p}{)}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saver}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{saver} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{train}\PY{o}{.}\PY{n}{Saver}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{n}{init\PYZus{}state}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{,} \PY{n}{saver}\PY{p}{,} \PY{n}{prob}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{k}{def} \PY{n+nf}{trainer}\PY{p}{(}\PY{n}{myCell}\PY{p}{,}\PY{n}{num\PYZus{}batches}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             
+             \PY{n}{start\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Define the placeholders}
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{placeholders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{targets} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}
+             \PY{c+c1}{\PYZsh{} Create the network}
+             \PY{n}{init\PYZus{}state}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{,} \PY{n}{saver}\PY{p}{,} \PY{n}{prob}\PY{o}{=}\PY{n}{network}\PY{p}{(}\PY{n}{myCell}\PY{p}{,}\PY{n}{inputs}\PY{p}{,}\PY{n}{targets}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train\PYZus{}num\PYZus{}batches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{loader}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}\PY{p}{)}
+             
+             \PY{k}{if} \PY{p}{(}\PY{n}{num\PYZus{}batches} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{num\PYZus{}batches}\PY{o}{=}\PY{n}{loader}\PY{o}{.}\PY{n}{train\PYZus{}num\PYZus{}batches}
+         
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+                  
+                 \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{global\PYZus{}variables\PYZus{}initializer}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} computation graph for training}
+                 \PY{n}{training\PYZus{}losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         
+                 \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}epochs}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{loader}\PY{o}{.}\PY{n}{reset\PYZus{}batch\PYZus{}pointer}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{state\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init\PYZus{}state}\PY{p}{)}
+                     \PY{n}{training\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+         
+                     \PY{k}{for} \PY{n}{batch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}batches}\PY{p}{)}\PY{p}{:}
+         
+                         \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{loader}\PY{o}{.}\PY{n}{next\PYZus{}batch\PYZus{}train}\PY{p}{(}\PY{p}{)}
+         
+                         \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{inputs}\PY{p}{]} \PY{o}{=} \PY{n}{x}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{targets}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+                         
+                         \PY{k}{if} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RNN}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{myCell}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{:}
+                             \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}
+                         \PY{k}{else}\PY{p}{:}
+                             \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{c}
+                             \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{h}
+         
+                         \PY{n}{train\PYZus{}loss\PYZus{}}\PY{p}{,} \PY{n}{state\PYZus{}}\PY{p}{,} \PY{n}{\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{loss}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{]}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict}\PY{p}{)}
+                         \PY{n}{training\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{train\PYZus{}loss\PYZus{}}
+                     \PY{n}{training\PYZus{}loss}\PY{o}{=}\PY{n}{training\PYZus{}loss}\PY{o}{/}\PY{n}{num\PYZus{}batches}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epoch:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{epoch}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{training\PYZus{}loss}\PY{p}{)}
+                     \PY{n}{training\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{training\PYZus{}loss}\PY{p}{)}
+                 \PY{n}{saver}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{save\PYZus{}dir}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saved\PYZus{}model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{end\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             
+             \PY{n}{timer}\PY{p}{(}\PY{n}{start\PYZus{}time}\PY{p}{,} \PY{n}{end\PYZus{}time}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{training\PYZus{}losses}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{re\PYZus{}lstm\PYZus{}basic} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.3512845264898763
+epoch: 1 loss: 1.79413751395973
+epoch: 2 loss: 1.6284469804248294
+epoch: 3 loss: 1.5361737489700318
+epoch: 4 loss: 1.4740768799910675
+epoch: 5 loss: 1.4320809776718553
+epoch: 6 loss: 1.399008989978481
+epoch: 7 loss: 1.3731264997173
+epoch: 8 loss: 1.3506505489349365
+epoch: 9 loss: 1.3317207349313271
+epoch: 10 loss: 1.3155785425289257
+epoch: 11 loss: 1.3017396102080474
+epoch: 12 loss: 1.2906548925348231
+epoch: 13 loss: 1.2782362216227763
+epoch: 14 loss: 1.2672040082312919
+epoch: 15 loss: 1.257996859421601
+epoch: 16 loss: 1.2500169270747417
+epoch: 17 loss: 1.2410382876525055
+epoch: 18 loss: 1.232925194018596
+epoch: 19 loss: 1.227118014644932
+epoch: 20 loss: 1.2206680471832687
+epoch: 21 loss: 1.2148376941680907
+epoch: 22 loss: 1.2107924835101977
+epoch: 23 loss: 1.2043923216897088
+epoch: 24 loss: 1.1998636065302668
+epoch: 25 loss: 1.1968133829735421
+epoch: 26 loss: 1.1937202073432305
+epoch: 27 loss: 1.188500223288665
+epoch: 28 loss: 1.1840990646465404
+epoch: 29 loss: 1.1810637905791
+00 hours 04 minutes 41.41 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{re\PYZus{}rnn\PYZus{}basic} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.2818055597511497
+epoch: 1 loss: 1.8383384852795988
+epoch: 2 loss: 1.6897879845387227
+epoch: 3 loss: 1.6083508742822183
+epoch: 4 loss: 1.5571155741408065
+epoch: 5 loss: 1.5210590182123958
+epoch: 6 loss: 1.4940589685697814
+epoch: 7 loss: 1.4730424674781593
+epoch: 8 loss: 1.4561327470315468
+epoch: 9 loss: 1.4421495405403344
+epoch: 10 loss: 1.4304097974622572
+epoch: 11 loss: 1.4205671742155745
+epoch: 12 loss: 1.4117792123072856
+epoch: 13 loss: 1.4037732723596934
+epoch: 14 loss: 1.396948775085243
+epoch: 15 loss: 1.3912428868783486
+epoch: 16 loss: 1.3862537145614624
+epoch: 17 loss: 1.381768251754142
+epoch: 18 loss: 1.3775134099496378
+epoch: 19 loss: 1.373505989280907
+epoch: 20 loss: 1.3695869316925873
+epoch: 21 loss: 1.3661656328149745
+epoch: 22 loss: 1.363321708988499
+epoch: 23 loss: 1.3609219911936168
+epoch: 24 loss: 1.3586723469399118
+epoch: 25 loss: 1.3567053562886007
+epoch: 26 loss: 1.3552206058759948
+epoch: 27 loss: 1.3530423963392102
+epoch: 28 loss: 1.3502178797850737
+epoch: 29 loss: 1.348085652815329
+00 hours 01 minutes 50.99 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{k}{def} \PY{n+nf}{Synthesize}\PY{p}{(}\PY{n}{MyCell}\PY{p}{,}\PY{n}{init\PYZus{}string}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{None}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+             \PY{n}{num\PYZus{}steps\PYZus{}bak}\PY{o}{=}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}
+             \PY{n}{batch\PYZus{}size\PYZus{}bak}\PY{o}{=}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}
+             \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{placeholders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{targets} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}
+             \PY{n}{init\PYZus{}state}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{,} \PY{n}{saver}\PY{p}{,} \PY{n}{prob}\PY{o}{=}\PY{n}{network}\PY{p}{(}\PY{n}{MyCell}\PY{p}{,}\PY{n}{inputs}\PY{p}{,}\PY{n}{targets}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Define initialization}
+             \PY{k}{if} \PY{p}{(}\PY{n}{init\PYZus{}string} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{initialization} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Where are you going today?}\PY{l+s+s1}{\PYZsq{}}
+             \PY{k}{else}\PY{p}{:}
+                 \PY{n}{initialization} \PY{o}{=} \PY{n}{init\PYZus{}string}
+             \PY{n}{loader}\PY{o}{=} \PY{n}{TextLoader}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+             \PY{n}{forecast\PYZus{}data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{loader}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{get}\PY{p}{,} \PY{n}{initialization}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{forecast\PYZus{}data}\PY{p}{)}
+             \PY{n}{forecast\PYZus{}range} \PY{o}{=} \PY{l+m+mi}{100}
+             \PY{n}{top\PYZus{}k}\PY{o}{=}\PY{l+m+mi}{5}
+          
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Load saved model}
+                 \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saved\PYZus{}model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{state\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init\PYZus{}state}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} Run rnn on initialization data to get final hidden state before simulation}
+                 \PY{n}{state\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init\PYZus{}state}\PY{p}{)}
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{forecast\PYZus{}data}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}\PY{p}{:}
+         
+                     \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{} Feed current predicted}
+                     \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{inputs}\PY{p}{]} \PY{o}{=} \PY{n}{forecast\PYZus{}data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RNN}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{MyCell}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{c}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{h}
+                     \PY{c+c1}{\PYZsh{} Get new hidden state and prediction probabilities}
+                     \PY{n}{predicted\PYZus{}prob}\PY{p}{,} \PY{n}{state\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{prob}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{]}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict}\PY{p}{)}
+         
+                 \PY{c+c1}{\PYZsh{} last state of this step becomes first state of simulation}
+         
+                 \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{forecast\PYZus{}range}\PY{p}{)}\PY{p}{:}
+         
+                     \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{} Feed current predicted}
+                     \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{inputs}\PY{p}{]} \PY{o}{=} \PY{n}{forecast\PYZus{}data}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{:}\PY{p}{]}\PY{o}{.}\PY{n}{reshape}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{)}
+                     \PY{k}{if} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RNN}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{MyCell}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{c}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{h}
+                     \PY{n}{predicted\PYZus{}prob}\PY{p}{,} \PY{n}{state\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{prob}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{]}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict}\PY{p}{)}
+         
+                     \PY{n}{predicted\PYZus{}prob} \PY{o}{=} \PY{n}{predicted\PYZus{}prob}\PY{o}{.}\PY{n}{ravel}\PY{p}{(}\PY{p}{)}
+                     \PY{c+c1}{\PYZsh{} Simulate from top top\PYZus{}k probs}
+                     \PY{n}{predicted\PYZus{}prob}\PY{p}{[}\PY{n}{np}\PY{o}{.}\PY{n}{argsort}\PY{p}{(}\PY{n}{predicted\PYZus{}prob}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{n}{top\PYZus{}k}\PY{p}{]}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{predicted\PYZus{}prob} \PY{o}{=} \PY{n}{predicted\PYZus{}prob}\PY{o}{/}\PY{n}{np}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{n}{predicted\PYZus{}prob}\PY{p}{)}
+                     \PY{n}{sample} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{choice}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}chars}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{n}{p}\PY{o}{=}\PY{n}{predicted\PYZus{}prob}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         
+         
+                     \PY{n}{forecast\PYZus{}data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{hstack}\PY{p}{(}\PY{p}{(}\PY{n}{forecast\PYZus{}data}\PY{p}{,} \PY{n}{sample}\PY{p}{)}\PY{p}{)}
+         
+             \PY{n}{forecasted\PYZus{}chars} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{asarray}\PY{p}{(}\PY{p}{[}\PY{n}{loader}\PY{o}{.}\PY{n}{idx\PYZus{}to\PYZus{}vocab}\PY{p}{[}\PY{n}{elem}\PY{p}{]} \PY{k}{for} \PY{n}{elem} \PY{o+ow}{in} \PY{n}{forecast\PYZus{}data}\PY{p}{]}\PY{p}{)}
+         
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{forecasted\PYZus{}chars}\PY{p}{)}\PY{p}{)}
+           
+             \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{o}{=}\PY{n}{num\PYZus{}steps\PYZus{}bak}
+             \PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{batch\PYZus{}size\PYZus{}bak}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{k}{def} \PY{n+nf}{Tester}\PY{p}{(}\PY{n}{MyCell}\PY{p}{,} \PY{n}{num\PYZus{}batches}\PY{o}{=}\PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+             \PY{n}{tf}\PY{o}{.}\PY{n}{reset\PYZus{}default\PYZus{}graph}\PY{p}{(}\PY{p}{)}
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{variable\PYZus{}scope}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{placeholders}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{inputs} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}
+                     \PY{n}{targets} \PY{o}{=} \PY{n}{tf}\PY{o}{.}\PY{n}{placeholder}\PY{p}{(}\PY{n}{tf}\PY{o}{.}\PY{n}{int32}\PY{p}{,} \PY{p}{[}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{]}\PY{p}{)}
+             \PY{n}{init\PYZus{}state}\PY{p}{,} \PY{n}{train\PYZus{}step}\PY{p}{,} \PY{n}{loss}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{,} \PY{n}{saver}\PY{p}{,} \PY{n}{prob}\PY{o}{=}\PY{n}{network}\PY{p}{(}\PY{n}{MyCell}\PY{p}{,}\PY{n}{inputs}\PY{p}{,}\PY{n}{targets}\PY{p}{)}
+         
+             \PY{c+c1}{\PYZsh{} Define initialization}
+             \PY{n}{initialization} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Where are you going today?}\PY{l+s+s1}{\PYZsq{}}
+             \PY{n}{loader}\PY{o}{=} \PY{n}{TextLoader}\PY{p}{(}\PY{n}{args}\PY{o}{.}\PY{n}{data\PYZus{}dir}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{n}{args}\PY{o}{.}\PY{n}{batch\PYZus{}size}\PY{p}{,} \PY{n}{seq\PYZus{}length}\PY{o}{=}\PY{n}{args}\PY{o}{.}\PY{n}{num\PYZus{}steps}\PY{p}{)}
+         
+             \PY{n}{forecast\PYZus{}data}\PY{o}{=}\PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{map}\PY{p}{(}\PY{n}{loader}\PY{o}{.}\PY{n}{vocab\PYZus{}to\PYZus{}idx}\PY{o}{.}\PY{n}{get}\PY{p}{,} \PY{n}{initialization}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{forecast\PYZus{}data}\PY{p}{)}
+             \PY{n}{forecast\PYZus{}range} \PY{o}{=} \PY{l+m+mi}{100}
+             \PY{n}{top\PYZus{}k}\PY{o}{=}\PY{l+m+mi}{5}
+          
+             \PY{k}{if} \PY{p}{(}\PY{n}{num\PYZus{}batches} \PY{o+ow}{is} \PY{k+kc}{None}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{num\PYZus{}batches}\PY{o}{=}\PY{n}{loader}\PY{o}{.}\PY{n}{test\PYZus{}num\PYZus{}batches}
+             \PY{k}{with} \PY{n}{tf}\PY{o}{.}\PY{n}{Session}\PY{p}{(}\PY{p}{)} \PY{k}{as} \PY{n}{sess}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Load saved model}
+                 \PY{n}{saver}\PY{o}{.}\PY{n}{restore}\PY{p}{(}\PY{n}{sess}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{saved\PYZus{}model}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                 \PY{n}{state\PYZus{}} \PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{n}{init\PYZus{}state}\PY{p}{)}
+         
+                 \PY{n}{loader}\PY{o}{.}\PY{n}{reset\PYZus{}batch\PYZus{}pointer}\PY{p}{(}\PY{p}{)}
+                 
+                  \PY{c+c1}{\PYZsh{} Get test error loss}
+                 \PY{n}{test\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{num\PYZus{}batches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{num\PYZus{}batches}\PY{p}{)}
+         
+                 \PY{k}{for} \PY{n}{batch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}batches}\PY{p}{)}\PY{p}{:}
+         
+                     \PY{n}{x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{loader}\PY{o}{.}\PY{n}{next\PYZus{}batch\PYZus{}test}\PY{p}{(}\PY{p}{)}
+         
+                     \PY{n}{feed\PYZus{}dict} \PY{o}{=} \PY{n+nb}{dict}\PY{p}{(}\PY{p}{)}
+                     \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{inputs}\PY{p}{]} \PY{o}{=} \PY{n}{x}
+                     \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{targets}\PY{p}{]} \PY{o}{=} \PY{n}{y}
+         
+                     \PY{k}{if} \PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RNN}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{in} \PY{n}{MyCell}\PY{o}{.}\PY{n+nv+vm}{\PYZus{}\PYZus{}name\PYZus{}\PYZus{}}\PY{p}{)}\PY{p}{:}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}
+                     \PY{k}{else}\PY{p}{:}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{c}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{c}
+                         \PY{n}{feed\PYZus{}dict}\PY{p}{[}\PY{n}{init\PYZus{}state}\PY{o}{.}\PY{n}{h}\PY{p}{]} \PY{o}{=} \PY{n}{state\PYZus{}}\PY{o}{.}\PY{n}{h}
+         
+                     \PY{n}{test\PYZus{}loss\PYZus{}}\PY{p}{,} \PY{n}{state\PYZus{}}\PY{o}{=} \PY{n}{sess}\PY{o}{.}\PY{n}{run}\PY{p}{(}\PY{p}{[}\PY{n}{loss}\PY{p}{,} \PY{n}{final\PYZus{}state}\PY{p}{]}\PY{p}{,} \PY{n}{feed\PYZus{}dict}\PY{o}{=}\PY{n}{feed\PYZus{}dict}\PY{p}{)}
+                     \PY{n}{test\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{test\PYZus{}loss\PYZus{}}
+                 \PY{n}{test\PYZus{}loss}\PY{o}{=}\PY{n}{test\PYZus{}loss}\PY{o}{/}\PY{n}{num\PYZus{}batches}
+                 \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{test loss:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}  \PY{n}{test\PYZus{}loss}\PY{p}{)}
+         
+         
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{test\PYZus{}loss}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.4114972708073068
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:} 1.4114972708073068
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{What is the meaning of life}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  4  2  0  9  6  0  2  5  1  0 14  1  4  8  9  8 20  0  3 18  0 11
+  9 18  1]
+INFO:tensorflow:Restoring parameters from saved\_model
+What is the meaning of lifen
+As an adite to the presence.
+
+BUCKINGHAM:
+Madam, they do that have send you that,
+Being, though al
+
+    \end{Verbatim}
+
+    \section{(a) play with the
+architecture}\label{a-play-with-the-architecture}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}lstm\PYZus{}basic}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}lstm\PYZus{}basic}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_23_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+
+MENENIUS:
+Not all, to bear, he seek'd i' thy state:
+The prisoner of the marker-naturned wife;
+Whil
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{And keep your honours safe!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[26  8 12  0 28  1  1 23  0 15  3 13  7  0  5  3  8  3 13  7  6  0  6  4
+ 18  1 46]
+INFO:tensorflow:Restoring parameters from saved\_model
+And keep your honours safe!
+Lue and there thou hast not worldly heaven,
+Wherein thy huma'st that we swear'd;' 'I'll take
+you al
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Look, sir.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[36  3  3 28 16  0  6  9  7 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Look, sir.
+
+BIANCA:
+Beheld him that they be a constitue.
+
+ANGELO:
+And with thee, my lord or the letters to hol
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Make good this ostentation, and you shall Divide in all with us.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[42  4 28  1  0 20  3  3 12  0  2  5  9  6  0  3  6  2  1  8  2  4  2  9
+  3  8 16  0  4  8 12  0 15  3 13  0  6  5  4 11 11  0 47  9 27  9 12  1
+  0  9  8  0  4 11 11  0 17  9  2  5  0 13  6 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Make good this ostentation, and you shall Divide in all with us.
+
+QUEEN MARGARET:
+No more are shoning, be mocker.
+
+PAULINA:
+I'll stay as I die, who is the morn outs
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicLSTMCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.4114972708073068
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 1.4114972708073068
+\end{Verbatim}
+            
+    \subsubsection{Comment:}\label{comment}
+
+This experiment gives us a sense of how well a RNN (with LSTM) can
+generate new texts. The results are quite good, many of the synthesized
+sentences make sense and seem to follow the input sentence.
+
+    \section{(b) Compare with RNN}\label{b-compare-with-rnn}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{re\PYZus{}rnn\PYZus{}basic} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.278072653590022
+epoch: 1 loss: 1.8336338146312816
+epoch: 2 loss: 1.686809637095477
+epoch: 3 loss: 1.6048998574952822
+epoch: 4 loss: 1.5534927690351332
+epoch: 5 loss: 1.5175468992542576
+epoch: 6 loss: 1.490863183382395
+epoch: 7 loss: 1.470065796697462
+epoch: 8 loss: 1.4533231818998182
+epoch: 9 loss: 1.4395658673466862
+epoch: 10 loss: 1.427987441501102
+epoch: 11 loss: 1.4180384300850533
+epoch: 12 loss: 1.4094094727490398
+epoch: 13 loss: 1.4018475345663122
+epoch: 14 loss: 1.395225325146237
+epoch: 15 loss: 1.3894909530072599
+epoch: 16 loss: 1.384377310082719
+epoch: 17 loss: 1.3799945618655232
+epoch: 18 loss: 1.3761914362778536
+epoch: 19 loss: 1.3724097387210743
+epoch: 20 loss: 1.368999376168122
+epoch: 21 loss: 1.3666021347045898
+epoch: 22 loss: 1.3643000132328755
+epoch: 23 loss: 1.3605506465241717
+epoch: 24 loss: 1.3568198912852518
+epoch: 25 loss: 1.3539022484341183
+epoch: 26 loss: 1.3515175497209704
+epoch: 27 loss: 1.3498986650157618
+epoch: 28 loss: 1.3492409242166055
+epoch: 29 loss: 1.3479887930122583
+00 hours 01 minutes 52.03 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}rnn\PYZus{}basic}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}rnn\PYZus{}basic}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_32_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.4653091430664062
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}128}]:} 1.4653091430664062
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+Ahoman's like me;
+And,
+So should to the brave and by his father by the commands of the word.
+
+ARIEL
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{And keep your honours safe!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[26  8 12  0 28  1  1 23  0 15  3 13  7  0  5  3  8  3 13  7  6  0  6  4
+ 18  1 46]
+INFO:tensorflow:Restoring parameters from saved\_model
+And keep your honours safe!
+
+ANGELO:
+A bays,
+And by my brother,
+Make all this is to see that the chieful and bride them about t
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Look, sir.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[36  3  3 28 16  0  6  9  7 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Look, sir.
+
+AUTOLYCUS:
+And see the word.
+
+BRUTUS:
+In all thy morching by him.
+
+Clord:
+What would not as her fo
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Make good this ostentation, and you shall Divide in all with us.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[42  4 28  1  0 20  3  3 12  0  2  5  9  6  0  3  6  2  1  8  2  4  2  9
+  3  8 16  0  4  8 12  0 15  3 13  0  6  5  4 11 11  0 47  9 27  9 12  1
+  0  9  8  0  4 11 11  0 17  9  2  5  0 13  6 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Make good this ostentation, and you shall Divide in all with us.
+
+DUKE VINCENTIO:
+Why, when thy tone, brother of the pray, and thence ourselves.--warring to be sent
+
+    \end{Verbatim}
+
+    \subsubsection{Comment:}\label{comment}
+
+With only 1/4 of the parameters, the common RNN performs worse than RRN
+with LSTM, both in terms of training data and test data. The results
+will be summarised in the end of the file.
+
+    \subsection{(C)}\label{c}
+
+    \subsection{Alternative 1: RNN with the same number of
+paramters}\label{alternative-1-rnn-with-the-same-number-of-paramters}
+
+I change the default of num\_units to be 2 times the original. When
+dimension of dim(h) \textgreater{}\textgreater{} dim(x), we have 4 times
+the number of paramters
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{re\PYZus{}rnn\PYZus{}same\PYZus{}para} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.2097253612569863
+epoch: 1 loss: 1.7540055700250574
+epoch: 2 loss: 1.600972245834969
+epoch: 3 loss: 1.5188016968804436
+epoch: 4 loss: 1.467398614496798
+epoch: 5 loss: 1.4303846797427615
+epoch: 6 loss: 1.4010547676601925
+epoch: 7 loss: 1.3781295293086284
+epoch: 8 loss: 1.3596035718917847
+epoch: 9 loss: 1.3442243002556467
+epoch: 10 loss: 1.3316340227384824
+epoch: 11 loss: 1.3230614765270337
+epoch: 12 loss: 1.316254168587762
+epoch: 13 loss: 1.3088844756822329
+epoch: 14 loss: 1.3027201278789624
+epoch: 15 loss: 1.3010346605971053
+epoch: 16 loss: 1.2971659299489615
+epoch: 17 loss: 1.293206364399678
+epoch: 18 loss: 1.2895451713252712
+epoch: 19 loss: 1.2854666941874735
+epoch: 20 loss: 1.2792502938090144
+epoch: 21 loss: 1.274756629402573
+epoch: 22 loss: 1.2716307556306994
+epoch: 23 loss: 1.2698234970505173
+epoch: 24 loss: 1.2683388188078597
+epoch: 25 loss: 1.2667475255759986
+epoch: 26 loss: 1.2650151336515272
+epoch: 27 loss: 1.262469288465139
+epoch: 28 loss: 1.261826745239464
+epoch: 29 loss: 1.2600709451211465
+00 hours 02 minutes 56.66 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}rnn\PYZus{}same\PYZus{}para}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}rnn\PYZus{}same\PYZus{}para}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.458363134810265
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} 1.458363134810265
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicRNNCell}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+
+ANTONIO:
+I do be so.
+
+SEBASTIAN:
+'Sigute as the beasts,
+The people:
+And is the charms to die, manc
+
+    \end{Verbatim}
+
+    \subsubsection{Comment:}\label{comment}
+
+with increasing number of paramters, the error rate on training data
+indeed drops. However, when it comes on test data, the performance is
+not too much better than the original RNN.
+
+    \subsection{Alternative 2: RNN with two
+layers}\label{alternative-2-rnn-with-two-layers}
+
+I add a second layer to RNN node, and the out put is the tanh of the
+linear combination
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{re\PYZus{}rnn\PYZus{}two\PYZus{}layers} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicRNNCell\PYZus{}layer2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.3581952533206425
+epoch: 1 loss: 2.049096925194199
+epoch: 2 loss: 1.834638035619581
+epoch: 3 loss: 1.6918359685588527
+epoch: 4 loss: 1.6033923613058554
+epoch: 5 loss: 1.5479144244580656
+epoch: 6 loss: 1.5125735521316528
+epoch: 7 loss: 1.4736184197503168
+epoch: 8 loss: 1.452280355788566
+epoch: 9 loss: 1.432181021329519
+epoch: 10 loss: 1.4165653299640966
+epoch: 11 loss: 1.401964351293203
+epoch: 12 loss: 1.3804971140784186
+epoch: 13 loss: 1.3730403449084307
+epoch: 14 loss: 1.3641971407709894
+epoch: 15 loss: 1.3514305507814561
+epoch: 16 loss: 1.3403762340545655
+epoch: 17 loss: 1.3344579194043134
+epoch: 18 loss: 1.3359644161688315
+epoch: 19 loss: 1.3267669452203286
+epoch: 20 loss: 1.3177874307374697
+epoch: 21 loss: 1.3081248444479865
+epoch: 22 loss: 1.3071890186619115
+epoch: 23 loss: 1.31158167542638
+epoch: 24 loss: 1.307638204419935
+epoch: 25 loss: 1.2925809325398625
+epoch: 26 loss: 1.2988367621963088
+epoch: 27 loss: 1.296899526828044
+epoch: 28 loss: 1.2915581877167162
+epoch: 29 loss: 1.2931328225780179
+00 hours 05 minutes 47.30 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}rnn\PYZus{}two\PYZus{}layers}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}rnn\PYZus{}two\PYZus{}layers}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_48_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicRNNCell\PYZus{}layer2}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.4703839763681938
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}32}]:} 1.4703839763681938
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicRNNCell\PYZus{}layer2}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+
+GONZAS:
+Worse thou wilt to to broke fairless.
+
+ANTONIO:
+O, she way with tello,
+Or else hath been s
+
+    \end{Verbatim}
+
+    \subsection{Alternative 3: Coupled
+gating}\label{alternative-3-coupled-gating}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{re\PYZus{}lstm\PYZus{}cp\PYZus{}gates} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}cp\PYZus{}gates}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.416046219258695
+epoch: 1 loss: 1.787982727385856
+epoch: 2 loss: 1.606355304331393
+epoch: 3 loss: 1.5116805392342645
+epoch: 4 loss: 1.4542713326376837
+epoch: 5 loss: 1.4124292528307116
+epoch: 6 loss: 1.382810181540412
+epoch: 7 loss: 1.3576596330952
+epoch: 8 loss: 1.338059553584537
+epoch: 9 loss: 1.3210553652531392
+epoch: 10 loss: 1.3059581421517037
+epoch: 11 loss: 1.2933708525992729
+epoch: 12 loss: 1.2821165574563516
+epoch: 13 loss: 1.2710156382741156
+epoch: 14 loss: 1.261094585624901
+epoch: 15 loss: 1.2522326063465428
+epoch: 16 loss: 1.2443409971288732
+epoch: 17 loss: 1.2375701066609976
+epoch: 18 loss: 1.231886580828074
+epoch: 19 loss: 1.2275213041821043
+epoch: 20 loss: 1.22187795059101
+epoch: 21 loss: 1.2168895431467004
+epoch: 22 loss: 1.2132112651257903
+epoch: 23 loss: 1.2107071129051414
+epoch: 24 loss: 1.2085606401031082
+epoch: 25 loss: 1.205659548011986
+epoch: 26 loss: 1.2031305422654024
+epoch: 27 loss: 1.1996572185207057
+epoch: 28 loss: 1.1961765727481326
+epoch: 29 loss: 1.191584316459862
+00 hours 04 minutes 33.95 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}lstm\PYZus{}cp\PYZus{}gates}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}lstm\PYZus{}cp\PYZus{}gates}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}cp\PYZus{}gates}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.408695715538999
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} 1.408695715538999
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}cp\PYZus{}gates}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+
+BUCKINGHAM:
+Well, my lord; my lord. I dare now him the sun there.
+The tiely due he shoot him again
+
+    \end{Verbatim}
+
+    \subsubsection{Comment:}\label{comment}
+
+This method actually uses only one third of the parameters of RRN with
+LSTM (though I set the dimension to be 4*num\_units, one dimension is
+not used at all). The result is remarkably good, even better than RNN
+with LSTM.
+
+    \subsection{Alternative 4:
+Gers\_Schmidhuber\_variant}\label{alternative-4-gers_schmidhuber_variant}
+
+Similar to GS,except that I use the old cell state in the output
+generation.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{re\PYZus{}lstm\PYZus{}gsv} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GS\PYZus{}var}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 3.363343974706289
+epoch: 1 loss: 3.3163019927772317
+epoch: 2 loss: 3.315732444299234
+epoch: 3 loss: 3.3158376861262964
+epoch: 4 loss: 3.3160069298099826
+epoch: 5 loss: 3.3159387756038354
+epoch: 6 loss: 3.315959697156339
+epoch: 7 loss: 3.3155026384302086
+epoch: 8 loss: 3.3154809255857725
+epoch: 9 loss: 3.315448213267971
+epoch: 10 loss: 3.3159282555451264
+epoch: 11 loss: 3.3196518395398114
+epoch: 12 loss: 3.3397991554157156
+epoch: 13 loss: 3.3248990097561397
+epoch: 14 loss: 3.318152376123377
+epoch: 15 loss: 3.315842967420011
+epoch: 16 loss: 3.31541095166593
+epoch: 17 loss: 3.31460062748677
+epoch: 18 loss: 3.3142789531398464
+epoch: 19 loss: 3.314352188883601
+epoch: 20 loss: 3.3144172720006995
+epoch: 21 loss: 3.3146032178724134
+epoch: 22 loss: 3.3137088608097387
+epoch: 23 loss: 3.314081706227483
+epoch: 24 loss: 3.313422527828732
+epoch: 25 loss: 3.3145206064791295
+epoch: 26 loss: 3.3148009003819645
+epoch: 27 loss: 3.315016305768812
+epoch: 28 loss: 3.3144130487699766
+epoch: 29 loss: 3.3142786528613115
+00 hours 05 minutes 14.57 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}lstm\PYZus{}gsv}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}lstm\PYZus{}gsv}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GS\PYZus{}var}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell. h s neenonnoa e th eah  oe aoaa ooe ho a h  eoa eeaeh e  aaeooo   
+o  ttt t   
+
+ o o  o ee ttto e e
+
+    \end{Verbatim}
+
+    \subsubsection{Comment:}\label{comment}
+
+It turns out the result is simply nonsense. Indeed the new cell state
+can be very different from the old ones. I will implement the true
+Gers\_Schmidhuber\_variant later.
+
+    \subsection{Alternative 5: LSTM without
+outgating}\label{alternative-5-lstm-without-outgating}
+
+I remove the output gating process from RNN with LSTM
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}55}]:} \PY{n}{re\PYZus{}lstm\PYZus{}wo\PYZus{}outgate} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}without\PYZus{}outputgat}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.511373808577254
+epoch: 1 loss: 1.9185032599681133
+epoch: 2 loss: 1.7227911723626625
+epoch: 3 loss: 1.6110828824945398
+epoch: 4 loss: 1.5375597599390392
+epoch: 5 loss: 1.4864330994116293
+epoch: 6 loss: 1.4469531703639675
+epoch: 7 loss: 1.4160834976144738
+epoch: 8 loss: 1.3893059021717793
+epoch: 9 loss: 1.3695026958310925
+epoch: 10 loss: 1.3505120850898125
+epoch: 11 loss: 1.3340654959549776
+epoch: 12 loss: 1.3195242978431083
+epoch: 13 loss: 1.3065423308192072
+epoch: 14 loss: 1.29625913774645
+epoch: 15 loss: 1.2858429019515578
+epoch: 16 loss: 1.276657953133454
+epoch: 17 loss: 1.2668228284732717
+epoch: 18 loss: 1.2582147250304352
+epoch: 19 loss: 1.2505114291165327
+epoch: 20 loss: 1.2436416903057614
+epoch: 21 loss: 1.2398329921670863
+epoch: 22 loss: 1.2333261399655728
+epoch: 23 loss: 1.2277124843081912
+epoch: 24 loss: 1.2235617051253447
+epoch: 25 loss: 1.2173865015442307
+epoch: 26 loss: 1.2146573292242515
+epoch: 27 loss: 1.2127425967036067
+epoch: 28 loss: 1.2120825535542257
+epoch: 29 loss: 1.2087407286102707
+00 hours 04 minutes 26.11 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}lstm\PYZus{}wo\PYZus{}outgate}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}lstm\PYZus{}wo\PYZus{}outgate}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}without\PYZus{}outputgat}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+
+ANTIGO:
+He's not to the matter, too much brave her tempore of criest;
+Frow,--
+
+DUENGEY:
+'That's a 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}without\PYZus{}outputgat}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.4064168448143817
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} 1.4064168448143817
+\end{Verbatim}
+            
+    \subsubsection{Comment:}\label{comment}
+
+This model outperforms the original RNN with LSTM a little bit on test
+data, which is very surprising. It might be due to some chance. And the
+synthesize does not make too much sense.
+
+    \subsection{Alternative 6: LSTM\_GRU}\label{alternative-6-lstm_gru}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{re\PYZus{}lstm\PYZus{}gru} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GRU}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.334223858730213
+epoch: 1 loss: 1.7470246443877349
+epoch: 2 loss: 1.5680089280412004
+epoch: 3 loss: 1.477988102629378
+epoch: 4 loss: 1.4241609167408298
+epoch: 5 loss: 1.3837695895014583
+epoch: 6 loss: 1.3537682024208275
+epoch: 7 loss: 1.330116775873545
+epoch: 8 loss: 1.309953091595624
+epoch: 9 loss: 1.293100179852666
+epoch: 10 loss: 1.2778871781117207
+epoch: 11 loss: 1.263918281245876
+epoch: 12 loss: 1.251465842530534
+epoch: 13 loss: 1.240336748071619
+epoch: 14 loss: 1.2303572822261502
+epoch: 15 loss: 1.2227892637252809
+epoch: 16 loss: 1.2165855800783312
+epoch: 17 loss: 1.2080583978343655
+epoch: 18 loss: 1.2032933950424194
+epoch: 19 loss: 1.2013808637051968
+epoch: 20 loss: 1.1968386199023273
+epoch: 21 loss: 1.1925772080550323
+epoch: 22 loss: 1.1909029245376588
+epoch: 23 loss: 1.189226788443488
+epoch: 24 loss: 1.18636832430556
+epoch: 25 loss: 1.1828851119892017
+epoch: 26 loss: 1.179557349230792
+epoch: 27 loss: 1.1789381439621385
+epoch: 28 loss: 1.1757845646626242
+epoch: 29 loss: 1.1741969636968663
+00 hours 04 minutes 48.93 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}63}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}lstm\PYZus{}gru}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}lstm\PYZus{}gru}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_70_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GRU}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 1.4556386293248926
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} 1.4556386293248926
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GRU}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+
+ISABELLA:
+O, promised!
+
+MOPSA:
+O movedies, my lord, and, bride;
+Which was an earther of all with t
+
+    \end{Verbatim}
+
+    \subsection{Comment:}\label{comment}
+
+This algorithm is performs very well on training data. However, it
+performs badly on test data. There might be an issue of overfitting as
+the unit has very complicated structure.
+
+    \subsection{Alternative 7:
+Gers\_Schmidhuber}\label{alternative-7-gers_schmidhuber}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{re\PYZus{}lstm\PYZus{}gs} \PY{o}{=} \PY{n}{trainer}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GS}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+train\_num\_batches 185
+epoch: 0 loss: 2.772908304833077
+epoch: 1 loss: 2.484741784430839
+epoch: 2 loss: 2.4722106650068953
+epoch: 3 loss: 2.4704143343745053
+epoch: 4 loss: 2.468414695842846
+epoch: 5 loss: 2.466290939176405
+epoch: 6 loss: 2.4652486362972774
+epoch: 7 loss: 2.4660537784164016
+epoch: 8 loss: 2.4636327202255663
+epoch: 9 loss: 2.4623569436975425
+epoch: 10 loss: 2.462588102753098
+epoch: 11 loss: 2.4651515161668933
+epoch: 12 loss: 2.463069286861935
+epoch: 13 loss: 2.4629000174032676
+epoch: 14 loss: 2.461966625419823
+epoch: 15 loss: 2.4614935063027046
+epoch: 16 loss: 2.4591001691044987
+epoch: 17 loss: 2.4596380581726898
+epoch: 18 loss: 2.458849503542926
+epoch: 19 loss: 2.458760133949486
+epoch: 20 loss: 2.458425145535856
+epoch: 21 loss: 2.460179867615571
+epoch: 22 loss: 2.459446769147306
+epoch: 23 loss: 2.456298485317746
+epoch: 24 loss: 2.4558610929025186
+epoch: 25 loss: 2.4564284427745924
+epoch: 26 loss: 2.4570985665192477
+epoch: 27 loss: 2.4574203980935585
+epoch: 28 loss: 2.454690154823097
+epoch: 29 loss: 2.451968516530217
+00 hours 06 minutes 29.63 seconds
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{epcs} \PY{o}{=} \PY{p}{[}\PY{n}{i} \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n+nb}{len}\PY{p}{(}\PY{n}{re\PYZus{}lstm\PYZus{}gs}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{epcs}\PY{p}{,}\PY{n}{re\PYZus{}lstm\PYZus{}gs}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{loss for training data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_76_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{Tester}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GS}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[39  5  1  7  1  0  4  7  1  0 15  3 13  0 20  3  9  8 20  0  2  3 12  4
+ 15 44]
+INFO:tensorflow:Restoring parameters from saved\_model
+num\_batches 47
+test loss: 2.4673286955407323
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} 2.4673286955407323
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{Synthesize}\PY{p}{(}\PY{n}{MyBasicLSTMCell\PYZus{}GS}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Farewell.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+there are preprocessed data - lets load it
+[49  4  7  1 17  1 11 11 25]
+INFO:tensorflow:Restoring parameters from saved\_model
+Farewell.
+They shat whe berded mat pay pratrs tores serthillllllles tithedere teral hond ho averoustorarourer
+
+    \end{Verbatim}
+
+    \subsubsection{Comment:}\label{comment}
+
+The result is pretty bad again on both training and test data, though it
+is better than the Gers\_Schmidhuber\_variant, which outputs nonsense.
+
+    \section{Results summary}\label{results-summary}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{Name}        \PY{n}{train}   \PY{n}{test}
+        
+        \PY{n}{LSTM}\PY{p}{:} 		\PY{l+m+mf}{1.18}	\PY{l+m+mf}{1.411}
+        \PY{n}{RNN}\PY{p}{:} 		\PY{l+m+mf}{1.34} 	\PY{l+m+mf}{1.47}
+            
+        \PY{n}{RNN}\PY{o}{*}\PY{l+m+mi}{4}\PY{p}{:}	    \PY{l+m+mf}{1.27}	\PY{l+m+mf}{1.45}
+        \PY{n}{RNN\PYZus{}layer2}	\PY{l+m+mf}{1.29}	\PY{l+m+mf}{1.45}
+        \PY{n}{LSTM\PYZus{}cp}	    \PY{l+m+mf}{1.19} 	\PY{l+m+mf}{1.41}
+        \PY{n}{LSTM\PYZus{}gsv}	\PY{o}{\PYZgt{}}\PY{l+m+mi}{3}	     \PY{n}{NA}
+        \PY{n}{LSTM\PYZus{}wo\PYZus{}og}  \PY{l+m+mf}{1.28}	\PY{l+m+mf}{1.40}
+        \PY{n}{LSTM\PYZus{}gru}	\PY{l+m+mf}{1.17}	\PY{l+m+mf}{1.45}
+        \PY{n}{LSTM\PYZus{}gs}     \PY{l+m+mf}{2.45}	\PY{l+m+mf}{2.49}
+\end{Verbatim}
+
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

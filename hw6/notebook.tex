@@ -1,0 +1,1171 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{ZihaoWang\_hw6\_p2-crerar-3}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{import} \PY{n+nn}{sklearn}
+         \PY{k+kn}{import} \PY{n+nn}{pickle}
+         \PY{k+kn}{import} \PY{n+nn}{nltk}
+         \PY{n}{nltk}\PY{o}{.}\PY{n}{download}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{punkt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{k+kn}{import} \PY{n+nn}{itertools}
+         \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{k+kn}{import} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{sparse} \PY{k}{as} \PY{n+nn}{sparse}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{ensemble} \PY{k}{import} \PY{n}{RandomForestClassifier}\PY{p}{,}\PY{n}{AdaBoostClassifier}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+[nltk\_data] Downloading package punkt to /Users/wangzh/nltk\_data{\ldots}
+[nltk\_data]   Package punkt is already up-to-date!
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{data} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../MNIST.npy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{labels} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{float64}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{../MNIST\PYZus{}labels.npy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+        \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{model\PYZus{}selection} \PY{k}{import} \PY{n}{train\PYZus{}test\PYZus{}split}
+        \PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{data}\PY{p}{,}\PY{n}{labels}\PY{p}{,}
+                                                         \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{n+nb}{float}\PY{p}{(}\PY{l+m+mi}{2}\PY{o}{/}\PY{l+m+mi}{7}\PY{p}{)}\PY{p}{,} 
+                                                         \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{12345}\PY{p}{)}
+        \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}test} \PY{o}{=} \PY{n}{train\PYZus{}test\PYZus{}split}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y\PYZus{}test}\PY{p}{,}
+                                                       \PY{n}{test\PYZus{}size} \PY{o}{=} \PY{l+m+mf}{0.5}\PY{p}{,}
+                                                       \PY{n}{random\PYZus{}state} \PY{o}{=} \PY{l+m+mi}{12345}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{mytrain\PYZus{}x} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5000}\PY{p}{]}
+        \PY{n}{mytrain\PYZus{}y} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5000}\PY{p}{]}
+        \PY{n}{mytest\PYZus{}x} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+        \PY{n}{mytest\PYZus{}y} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{100}\PY{p}{]}
+        \PY{n}{myval\PYZus{}x} \PY{o}{=} \PY{n}{X\PYZus{}val}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+        \PY{n}{myval\PYZus{}y} \PY{o}{=} \PY{n}{y\PYZus{}val}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{500}\PY{p}{]}
+\end{Verbatim}
+
+
+    \hypertarget{a-experiment-with-randomforestclassifier}{%
+\section{(a) Experiment with
+RandomForestClassifier}\label{a-experiment-with-randomforestclassifier}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{l+m+mi}{10}
+        \PY{n}{min\PYZus{}sam} \PY{o}{=}\PY{l+m+mi}{100}
+        \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{l+m+mi}{50}
+        \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}
+            \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{criterion} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{entropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+        \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{n}{max\PYZus{}fea}\PY{p}{)}
+        
+        \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:} RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='entropy',
+                    max\_depth=None, max\_features=50, max\_leaf\_nodes=None,
+                    min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                    min\_samples\_leaf=1, min\_samples\_split=100,
+                    min\_weight\_fraction\_leaf=0.0, n\_estimators=10, n\_jobs=1,
+                    oob\_score=False, random\_state=None, verbose=0,
+                    warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{pred\PYZus{}val} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{error} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{pred\PYZus{}val} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}val}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{error}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} 0.0715
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{pred\PYZus{}prob\PYZus{}val} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{pred\PYZus{}prob\PYZus{}val}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} (10000, 10)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}57}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}forest}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}
+             \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{criterion} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{entropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{n}{max\PYZus{}fea}\PY{p}{)}
+             
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{fit\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+             
+             \PY{n}{pred\PYZus{}tra} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{)}
+             \PY{n}{pred\PYZus{}val} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}val}\PY{p}{)}
+             
+             \PY{n}{err\PYZus{}val} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{pred\PYZus{}val} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}val}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}val}\PY{p}{)}
+             \PY{n}{err\PYZus{}tra} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{pred\PYZus{}tra} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}train}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}train}\PY{p}{)}
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{err\PYZus{}tra}\PY{p}{,}\PY{n}{err\PYZus{}val}\PY{p}{,}\PY{n}{fit\PYZus{}time}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}58}]:} \PY{n}{my\PYZus{}forest}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}58}]:} (0.0105, 0.0632, 1.2128288745880127)
+\end{Verbatim}
+            
+    \hypertarget{fix-min_samples-10-and-max_features-10-and-tune-num_trees}{%
+\subsection{Fix min\_samples = 10 and max\_features = 10 and tune
+num\_trees}\label{fix-min_samples-10-and-max_features-10-and-tune-num_trees}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{nums\PYZus{}trees} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{]}
+         \PY{c+c1}{\PYZsh{}nums\PYZus{}trees = [10,20,30,40,100]}
+         \PY{n}{errs\PYZus{}tra} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{errs\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{times} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{nums\PYZus{}trees}\PY{p}{:}
+             \PY{n}{e1}\PY{p}{,}\PY{n}{e2}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}forest}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e1}\PY{p}{)}
+             \PY{n}{errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e2}\PY{p}{)}
+             \PY{n}{times}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{n}{times}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}79}]:} [1.3836920261383057,
+          2.726815938949585,
+          3.9291470050811768,
+          5.191199779510498,
+          12.848658084869385,
+          130.29941511154175,
+          76.91189503669739]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{nums\PYZus{}trees} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{20}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{40}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{,}\PY{l+m+mi}{600}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nums\PYZus{}trees}\PY{p}{,}\PY{n}{errs\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nums\PYZus{}trees}\PY{p}{,}\PY{n}{errs\PYZus{}tra}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}75}]:} [<matplotlib.lines.Line2D at 0x10bfc6710>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_16_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+From the results above we can see that increased number of trees help
+reduce variance and therefore reduce error on both training and
+validation data. However, when the tree number is big enough, the
+improvement is not that significant compared to when the number of trees
+is small.
+
+    \hypertarget{fix-num_trees-5-min_samples-10-and-tune-max_features}{%
+\subsection{Fix num\_trees = 5, min\_samples = 10, and tune
+max\_features}\label{fix-num_trees-5-min_samples-10-and-tune-max_features}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}62}]:} \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{70}\PY{p}{,}\PY{l+m+mi}{90}\PY{p}{]}
+         \PY{n}{errs\PYZus{}tra\PYZus{}f} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{errs\PYZus{}val\PYZus{}f} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{times\PYZus{}f} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{max\PYZus{}fea}\PY{p}{:}
+             \PY{n}{e1}\PY{p}{,}\PY{n}{e2}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}forest}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{errs\PYZus{}tra\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e1}\PY{p}{)}
+             \PY{n}{errs\PYZus{}val\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e2}\PY{p}{)}
+             \PY{n}{times\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}fea}\PY{p}{,}\PY{n}{errs\PYZus{}tra\PYZus{}f}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}fea}\PY{p}{,}\PY{n}{errs\PYZus{}val\PYZus{}f}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}64}]:} [<matplotlib.lines.Line2D at 0x1a59eca630>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_20_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+From the results above, we can see increased number of max\_features
+help reduce error rate on both training and validation data, until it
+reaches a certain number (70 in this case). However, the effect of
+max\_features is correlated with min\_samples. So comprehensive
+experiements are needed.
+
+    \hypertarget{fix-num_trees-10-max_features-70-and-tune-min_samples}{%
+\subsection{Fix num\_trees = 10, max\_features =70 and tune
+min\_samples}\label{fix-num_trees-10-max_features-70-and-tune-min_samples}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{n}{min\PYZus{}samples} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{5}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{errs\PYZus{}tra\PYZus{}s} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{errs\PYZus{}val\PYZus{}s} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{times\PYZus{}s} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{min\PYZus{}samples}\PY{p}{:}
+             \PY{n}{e1}\PY{p}{,}\PY{n}{e2}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}forest}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{70}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{errs\PYZus{}tra\PYZus{}s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e1}\PY{p}{)}
+             \PY{n}{errs\PYZus{}val\PYZus{}s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{e2}\PY{p}{)}
+             \PY{n}{times\PYZus{}s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{min\PYZus{}samples}\PY{p}{,}\PY{n}{errs\PYZus{}tra\PYZus{}s}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{min\PYZus{}samples}\PY{p}{,}\PY{n}{errs\PYZus{}val\PYZus{}s}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}70}]:} [<matplotlib.lines.Line2D at 0x1a59e71518>]
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_24_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+From the results above we can see the improvement decreases with
+increasing number of min\_samples, until it is too small (3, in this
+case) which will cause overfitting. However, as there is correlatio
+between min\_samples and max\_features, more comprehensive experiments
+are needed.
+
+    \hypertarget{run-on-test-data-with-best-protocol}{%
+\subsection{Run on test data with best
+protocol}\label{run-on-test-data-with-best-protocol}}
+
+For effiency concern I use 100 trees. Then the combination is
+(num\_trees = 100, min\_samples = 10, max\_samples = 70)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{l+m+mi}{100}
+         \PY{n}{min\PYZus{}sam} \PY{o}{=}\PY{l+m+mi}{10}
+         \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{l+m+mi}{70}
+         \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}
+             \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{criterion} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{entropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+         \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{n}{max\PYZus{}fea}\PY{p}{)}
+         \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='entropy',
+                     max\_depth=None, max\_features=70, max\_leaf\_nodes=None,
+                     min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                     min\_samples\_leaf=1, min\_samples\_split=10,
+                     min\_weight\_fraction\_leaf=0.0, n\_estimators=100, n\_jobs=1,
+                     oob\_score=False, random\_state=None, verbose=0,
+                     warm\_start=False)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{pred\PYZus{}test} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}test}\PY{p}{)}
+         \PY{n}{err\PYZus{}test} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{pred\PYZus{}test} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}test}\PY{p}{)}
+         \PY{n}{err\PYZus{}test}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}72}]:} 0.0354
+\end{Verbatim}
+            
+    \hypertarget{b}{%
+\section{(b)}\label{b}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{:}
+             \PY{n}{clfb} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}
+             \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{criterion} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{entropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+             \PY{n}{max\PYZus{}features} \PY{o}{=} \PY{n}{max\PYZus{}fea}\PY{p}{)}
+             \PY{n}{adb} \PY{o}{=} \PY{n}{AdaBoostClassifier}\PY{p}{(}
+                 \PY{n}{clfb}\PY{p}{,}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{n\PYZus{}estimators}\PY{p}{,}\PY{n}{algorithm}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{SAMME}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{random\PYZus{}state}\PY{o}{=}\PY{l+m+mi}{12345}\PY{p}{)}
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{adb}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y\PYZus{}train}\PY{p}{)}
+             \PY{n}{fit\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{adb}\PY{p}{,}\PY{n}{fit\PYZus{}time}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}97}]:} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}97}]:} (AdaBoostClassifier(algorithm='SAMME',
+                    base\_estimator=RandomForestClassifier(bootstrap=True, class\_weight=None, criterion='entropy',
+                      max\_depth=None, max\_features=10, max\_leaf\_nodes=None,
+                      min\_impurity\_decrease=0.0, min\_impurity\_split=None,
+                      min\_samples\_leaf=1, min\_samples\_split=10,
+                      min\_weight\_fraction\_leaf=0.0, n\_estimators=1, n\_jobs=1,
+                      oob\_score=False, random\_state=None, verbose=0,
+                      warm\_start=False),
+                    learning\_rate=1.0, n\_estimators=10, random\_state=12345),
+          1.8059000968933105)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{def} \PY{n+nf}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{adb}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{:}
+             \PY{n}{adb\PYZus{}pred} \PY{o}{=} \PY{n}{adb}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+             \PY{n}{adb\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{adb\PYZus{}pred} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{k}{return}\PY{p}{(}\PY{n}{adb\PYZus{}err}\PY{p}{)}
+\end{Verbatim}
+
+
+    \hypertarget{fix-min_samples-10-max_features-10-num_trees-1-and-tune-n_estimators}{%
+\subsection{Fix min\_samples = 10, max\_features = 10, num\_trees = 1,
+and tune
+n\_estimators}\label{fix-min_samples-10-max_features-10-num_trees-1-and-tune-n_estimators}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{n}{nums\PYZus{}est} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{150}\PY{p}{,}\PY{l+m+mi}{200}\PY{p}{]}
+         \PY{n}{adbs} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adb\PYZus{}times} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adbne\PYZus{}errs\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adbne\PYZus{}errs\PYZus{}tra} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{nums\PYZus{}est}\PY{p}{:}
+             \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{adbs}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{adb\PYZus{}times}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{adbne\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n}{adbne\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nums\PYZus{}est}\PY{p}{,}\PY{n}{adbne\PYZus{}errs\PYZus{}tra}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nums\PYZus{}est}\PY{p}{,}\PY{n}{adbne\PYZus{}errs\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+From results above, we can see n\_estimates = 50 is sufficent.
+
+    \hypertarget{fix-n_estimators-10-min_samples-10-num_trees-1-and-tune-max_features}{%
+\subsection{Fix n\_estimators = 10, min\_samples = 10, num\_trees = 1,
+and tune
+max\_features}\label{fix-n_estimators-10-min_samples-10-num_trees-1-and-tune-max_features}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{]}
+         \PY{n}{adbs\PYZus{}f} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adb\PYZus{}times\PYZus{}f} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adbf\PYZus{}errs\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adbf\PYZus{}errs\PYZus{}tra} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{max\PYZus{}fea}\PY{p}{:}
+             \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{adb\PYZus{}times\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}fea}\PY{p}{,}\PY{n}{adbf\PYZus{}errs\PYZus{}tra}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}fea}\PY{p}{,}\PY{n}{adbf\PYZus{}errs\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_39_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{max\PYZus{}fea2} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{200}\PY{p}{,}\PY{l+m+mi}{300}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{max\PYZus{}fea2}\PY{p}{:}
+             \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{adb\PYZus{}times\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{adbf\PYZus{}errs\PYZus{}val}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} [0.1028, 0.0793, 0.069, 0.0674, 0.062]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{adb\PYZus{}times\PYZus{}f}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} [1.8186509609222412,
+          5.622082948684692,
+          10.067394256591797,
+          18.769381046295166,
+          27.02329421043396]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{max\PYZus{}fea3} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{max\PYZus{}fea3}\PY{p}{:}
+             \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{adb\PYZus{}times\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n}{max\PYZus{}fea4} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{700}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{max\PYZus{}fea4}\PY{p}{:}
+             \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{n}{x}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{adb\PYZus{}times\PYZus{}f}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n}{adbf\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}fea}\PY{o}{+}\PY{n}{max\PYZus{}fea2}\PY{o}{+}\PY{n}{max\PYZus{}fea3}\PY{o}{+}\PY{n}{max\PYZus{}fea4}\PY{p}{,}\PY{n}{adbf\PYZus{}errs\PYZus{}tra}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{max\PYZus{}fea}\PY{o}{+}\PY{n}{max\PYZus{}fea2}\PY{o}{+}\PY{n}{max\PYZus{}fea3}\PY{o}{+}\PY{n}{max\PYZus{}fea4}\PY{p}{,}\PY{n}{adbf\PYZus{}errs\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_45_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+From results above, we can see the best performance on validation data
+is achieved at max\_features = 500, much higher than in
+RandomForestClassifier.
+
+    \hypertarget{fix-n_estimators-10-max_features-10-num_trees-1-and-tune-min_samples}{%
+\subsection{Fix n\_estimators = 10, max\_features = 10, num\_trees = 1,
+and tune
+min\_samples}\label{fix-n_estimators-10-max_features-10-num_trees-1-and-tune-min_samples}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}94}]:} \PY{n}{min\PYZus{}sam} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{,}\PY{l+m+mi}{100}\PY{p}{,}\PY{l+m+mi}{500}\PY{p}{]}
+         \PY{n}{adbs\PYZus{}s} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adb\PYZus{}times\PYZus{}s} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adbs\PYZus{}errs\PYZus{}tra} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{n}{adbs\PYZus{}errs\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+         \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{min\PYZus{}sam}\PY{p}{:}
+             \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{min\PYZus{}sam} \PY{o}{=} \PY{n}{x}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{n}{adb\PYZus{}times\PYZus{}s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+             \PY{n}{adbs\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}95}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{adbs\PYZus{}errs\PYZus{}tra}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{adbs\PYZus{}errs\PYZus{}val}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_49_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+Similar to previous cases, error rate on both training and validation
+increases as min\_samples increase.
+
+    \hypertarget{fix-n_estimators-10-max_features-10-min_samples-10-and-tune-num_trees}{%
+\subsection{Fix n\_estimators = 10, max\_features = 10, min\_samples =
+10, and tune
+num\_trees}\label{fix-n_estimators-10-max_features-10-min_samples-10-and-tune-num_trees}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}101}]:} \PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{30}\PY{p}{,}\PY{l+m+mi}{50}\PY{p}{]}
+          \PY{n}{adbs\PYZus{}t} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{adb\PYZus{}times\PYZus{}t} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{adbt\PYZus{}errs\PYZus{}tra} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{n}{adbt\PYZus{}errs\PYZus{}val} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{for} \PY{n}{x} \PY{o+ow}{in} \PY{n}{num\PYZus{}trees}\PY{p}{:}
+              \PY{n}{a}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{n}{x}\PY{p}{)}
+              \PY{n}{adbs\PYZus{}t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+              \PY{n}{adb\PYZus{}times\PYZus{}t}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{t}\PY{p}{)}
+              \PY{n}{adbt\PYZus{}errs\PYZus{}tra}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}train}\PY{p}{)}\PY{p}{)}
+              \PY{n}{adbt\PYZus{}errs\PYZus{}val}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{a}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}val}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{adbt\PYZus{}errs\PYZus{}tra}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{p}{,}\PY{n}{adbt\PYZus{}errs\PYZus{}val}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_53_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+From results above, we can see error\_rate decreases as the number of
+trees in the base\_estimator increases. However, it is sufficient to use
+num\_trees = 10 as the improvement gets very small when the tree number
+gets bigger.
+
+    \hypertarget{run-on-test-data-with-best-protocol}{%
+\subsection{Run on test data with best
+protocol}\label{run-on-test-data-with-best-protocol}}
+
+Considering effiency we set (num\_trees = 10, n\_estimators = 50,
+min\_samples = 10, max\_features = 10)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}104}]:} \PY{n}{best\PYZus{}adb}\PY{p}{,}\PY{n}{t} \PY{o}{=} \PY{n}{my\PYZus{}boostforest}\PY{p}{(}\PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{n\PYZus{}estimators}\PY{o}{=} \PY{l+m+mi}{50}\PY{p}{,} \PY{n}{min\PYZus{}sam} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}106}]:} \PY{n}{best\PYZus{}adb\PYZus{}err\PYZus{}test} \PY{o}{=} \PY{n}{predict\PYZus{}eval}\PY{p}{(}\PY{n}{best\PYZus{}adb}\PY{p}{,}\PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}test}\PY{p}{,}\PY{n}{y}\PY{o}{=}\PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}107}]:} \PY{n}{best\PYZus{}adb\PYZus{}err\PYZus{}test}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}107}]:} 0.0337
+\end{Verbatim}
+            
+    \hypertarget{comparison-with-randomforestclassifier}{%
+\subsubsection{Comparison with
+RandomForestClassifier}\label{comparison-with-randomforestclassifier}}
+
+The best error rate decreases a little bit compared with the previous
+best model. The max\_features is much larger in order to achieve good
+result.
+
+    \hypertarget{c-implement-differen-reweighting-rule}{%
+\section{(c) implement differen reweighting
+rule}\label{c-implement-differen-reweighting-rule}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} fit model with boost random forest with weight update: w = w/e}
+        \PY{k}{def} \PY{n+nf}{my\PYZus{}boostforest2}\PY{p}{(}\PY{n}{num\PYZus{}est}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{min\PYZus{}sam} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                            \PY{n}{X} \PY{o}{=} \PY{n}{mytrain\PYZus{}x}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{mytrain\PYZus{}y}\PY{p}{)}\PY{p}{:}
+            
+            \PY{c+c1}{\PYZsh{}\PYZsh{} initialzation}
+            \PY{n}{l} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+            \PY{n}{trees} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{weights} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{l+m+mi}{1}\PY{o}{/}\PY{n+nb}{float}\PY{p}{(}\PY{n}{l}\PY{p}{)}\PY{p}{]}\PY{o}{*}\PY{n}{l}\PY{p}{)}
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{p}{)}\PY{p}{:}
+                \PY{n}{clf} \PY{o}{=} \PY{n}{RandomForestClassifier}\PY{p}{(}
+                \PY{n}{n\PYZus{}estimators}\PY{o}{=}\PY{n}{num\PYZus{}est}\PY{p}{,} \PY{n}{min\PYZus{}samples\PYZus{}split}\PY{o}{=}\PY{n}{min\PYZus{}sam}\PY{p}{,}\PY{n}{max\PYZus{}features}\PY{o}{=}\PY{n}{max\PYZus{}fea}\PY{p}{,} 
+                \PY{n}{criterion}\PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{entropy}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                \PY{n}{new\PYZus{}tree} \PY{o}{=} \PY{n}{clf}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{,} \PY{n}{sample\PYZus{}weight} \PY{o}{=} \PY{n}{weights}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{}\PYZsh{} get error terms}
+                \PY{n}{pred} \PY{o}{=} \PY{n}{new\PYZus{}tree}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+                \PY{n}{err\PYZus{}index} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{nonzero}\PY{p}{(}\PY{n}{pred} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                \PY{c+c1}{\PYZsh{}\PYZsh{} update weights}
+                \PY{n}{e} \PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{n}{err\PYZus{}index}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+                \PY{n}{weights}\PY{p}{[}\PY{n}{err\PYZus{}index}\PY{p}{]} \PY{o}{=} \PY{n}{weights}\PY{p}{[}\PY{n}{err\PYZus{}index}\PY{p}{]}\PY{o}{/}\PY{n}{e}
+                \PY{n}{weights} \PY{o}{=} \PY{n}{weights}\PY{o}{/}\PY{n}{weights}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+                \PY{n}{trees}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{new\PYZus{}tree}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{trees}\PY{p}{)}   
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}trees\PYZus{}predict}\PY{p}{(}\PY{n}{trees}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{mytest\PYZus{}x}\PY{p}{)}\PY{p}{:}
+            \PY{n}{whole\PYZus{}proba} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{shape}\PY{o}{=}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{shape}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{l+m+mi}{10}\PY{p}{,}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trees}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,}\PY{n}{t} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{trees}\PY{p}{)}\PY{p}{:}
+                \PY{n}{whole\PYZus{}proba}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{p}{,}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{t}\PY{o}{.}\PY{n}{predict\PYZus{}proba}\PY{p}{(}\PY{n}{X}\PY{p}{)}
+            
+            \PY{n}{mean\PYZus{}proba} \PY{o}{=} \PY{n}{whole\PYZus{}proba}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{2}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{}final\PYZus{}proba = mean\PYZus{}proba.mean(axis = 1)}
+            
+            \PY{k}{return}\PY{p}{(}\PY{n}{mean\PYZus{}proba}\PY{o}{.}\PY{n}{argmax}\PY{p}{(}\PY{n}{axis} \PY{o}{=} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{exper\PYZus{}mybforest2}\PY{p}{(}\PY{n}{num\PYZus{}est} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{min\PYZus{}sam} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{l+m+mi}{10}\PY{p}{,}
+                            \PY{n}{X} \PY{o}{=} \PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}v} \PY{o}{=} \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}v} \PY{o}{=} \PY{n}{y\PYZus{}val}\PY{p}{)}\PY{p}{:}
+            
+            \PY{n}{start} \PY{o}{=}\PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+            \PY{n}{trees} \PY{o}{=} \PY{n}{my\PYZus{}boostforest2}\PY{p}{(}\PY{n}{num\PYZus{}est} \PY{o}{=} \PY{n}{num\PYZus{}est}\PY{p}{,} \PY{n}{num\PYZus{}trees} \PY{o}{=} \PY{n}{num\PYZus{}trees}\PY{p}{,} \PY{n}{min\PYZus{}sam} \PY{o}{=} \PY{n}{min\PYZus{}sam}\PY{p}{,} \PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{n}{max\PYZus{}fea}\PY{p}{,}
+                            \PY{n}{X} \PY{o}{=} \PY{n}{X}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{y}\PY{p}{)}
+            \PY{n}{fit\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+            \PY{n}{train\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{my\PYZus{}trees\PYZus{}predict}\PY{p}{(}\PY{n}{trees}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{X}\PY{p}{)}\PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)} 
+            \PY{n}{val\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{my\PYZus{}trees\PYZus{}predict}\PY{p}{(}\PY{n}{trees}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}v}\PY{p}{)}\PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}v}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}v}\PY{p}{)}
+            \PY{k}{return}\PY{p}{(}\PY{n}{train\PYZus{}err}\PY{p}{,} \PY{n}{val\PYZus{}err}\PY{p}{,} \PY{n}{fit\PYZus{}time}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{import} \PY{n+nn}{random}
+        \PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{12345}\PY{p}{)}
+        \PY{n}{exper\PYZus{}mybforest2}\PY{p}{(}\PY{n}{max\PYZus{}fea} \PY{o}{=} \PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} (0.0, 0.0319, 94.53871297836304)
+\end{Verbatim}
+            
+    \hypertarget{comparison}{%
+\subsection{Comparison}\label{comparison}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{exper\PYZus{}mybforest2}\PY{p}{(}\PY{n}{num\PYZus{}est}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{80}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}10}]:} (0.0, 0.0325, 97.89373207092285)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{exper\PYZus{}mybforest2}\PY{p}{(}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{200}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} (0.0, 0.0334, 183.90890407562256)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{exper\PYZus{}mybforest2}\PY{p}{(}\PY{n}{num\PYZus{}est}\PY{o}{=}\PY{l+m+mi}{5}\PY{p}{,}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:} (0.0, 0.0356, 49.37372612953186)
+\end{Verbatim}
+            
+    In the few experiments above I tried two different strategies: one is to
+grow one tree sequentially and grow many trees; the other is to grow one
+forest (10 trees say) sequentially and grow fewer forests. The result
+shows the first one works better (as indicated in the requirement in the
+assignment). Then we carry out experiment on test data.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{exper\PYZus{}mybforest2}\PY{p}{(}\PY{n}{num\PYZus{}est}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,}\PY{n}{num\PYZus{}trees}\PY{o}{=}\PY{l+m+mi}{80}\PY{p}{,}\PY{n}{min\PYZus{}sam}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{,} \PY{n}{max\PYZus{}fea}\PY{o}{=}\PY{l+m+mi}{100}\PY{p}{,} \PY{n}{X\PYZus{}v} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}v} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:} (0.0, 0.0316, 98.30693411827087)
+\end{Verbatim}
+            
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+The error rate on test data reports an error rate of 0.0316, better than
+all previous results.
+
+    \hypertarget{d}{%
+\section{(d)}\label{d}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{svm} \PY{k}{import} \PY{n}{SVC}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}45}]:} \PY{k}{def} \PY{n+nf}{my\PYZus{}SVM}\PY{p}{(}\PY{n}{pen}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{X}\PY{o}{=}\PY{n}{X\PYZus{}train}\PY{p}{,} \PY{n}{y} \PY{o}{=} \PY{n}{y\PYZus{}train}\PY{p}{,} \PY{n}{X\PYZus{}v} \PY{o}{=} \PY{n}{X\PYZus{}val}\PY{p}{,} \PY{n}{y\PYZus{}v} \PY{o}{=} \PY{n}{y\PYZus{}val}\PY{p}{,} \PY{n}{X\PYZus{}t} \PY{o}{=} \PY{n}{X\PYZus{}test}\PY{p}{,} \PY{n}{y\PYZus{}t} \PY{o}{=} \PY{n}{y\PYZus{}test}\PY{p}{)}\PY{p}{:}
+             \PY{n}{gsvm}\PY{o}{=}\PY{n}{SVC}\PY{p}{(}\PY{n}{kernel}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{rbf}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{C}\PY{o}{=}\PY{l+m+mf}{1.}\PY{o}{/}\PY{n}{pen}\PY{p}{)}
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{gsvm}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{X}\PY{p}{,}\PY{n}{y}\PY{p}{)}
+             \PY{n}{fit\PYZus{}time} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{start}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Fit finished after: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{fit\PYZus{}time}\PY{p}{)} \PY{p}{)}
+             
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{train\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{gsvm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+             \PY{n}{pred\PYZus{}time1} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n}{start}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training data prediction finished after: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{pred\PYZus{}time1}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rates on the training is: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{train\PYZus{}err}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{val\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{gsvm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}v}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}v}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}v}\PY{p}{)}
+             \PY{n}{pred\PYZus{}time2} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n}{start}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Validation data prediction finished after: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{pred\PYZus{}time2}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rates on the validation data is: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{val\PYZus{}err}\PY{p}{)}\PY{p}{)}
+             
+             \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+             \PY{n}{test\PYZus{}err} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{gsvm}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{X\PYZus{}t}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n}{y\PYZus{}t}\PY{p}{)}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{y\PYZus{}t}\PY{p}{)}
+             \PY{n}{pred\PYZus{}time3} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)} \PY{o}{\PYZhy{}}\PY{n}{start}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test data prediction finished after: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{pred\PYZus{}time3}\PY{p}{)}\PY{p}{)}
+             \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{error rates on the test data is: }\PY{l+s+s2}{\PYZdq{}} \PY{o}{+} \PY{n+nb}{str}\PY{p}{(}\PY{n}{test\PYZus{}err}\PY{p}{)}\PY{p}{)}
+             
+             \PY{k}{return}\PY{p}{(}\PY{n}{train\PYZus{}err}\PY{p}{,}\PY{n}{val\PYZus{}err}\PY{p}{,}\PY{n}{test\PYZus{}err}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}48}]:} \PY{n}{experi1} \PY{o}{=} \PY{n}{my\PYZus{}SVM}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fit finished after: 8429.379841089249
+Training data prediction finished after: 2123.5155980587006
+error rates on the training is: 0.0
+Validation data prediction finished after: 425.18497371673584
+error rates on the validation data is: 0.8853
+Test data prediction finished after: 424.8688020706177
+error rates on the test data is: 0.8833
+
+    \end{Verbatim}
+
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+from the experiment above we can already see that SVM takes much longer
+both to predict and fit. Also, penalty parameter is very important: with
+small penalty (1 in this case), the model overtfits: does excellently on
+training data while performing poorly on validation and test data.
+Below, constrained by time,I carry out one more experiment with bigger
+penalty parameter (10 in this case)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}50}]:} \PY{n}{experi2} \PY{o}{=} \PY{n}{my\PYZus{}SVM}\PY{p}{(}\PY{n}{pen} \PY{o}{=} \PY{l+m+mf}{0.1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Fit finished after: 16468.651293992996
+Training data prediction finished after: 2144.935243844986
+error rates on the training is: 0.0
+Validation data prediction finished after: 428.4656901359558
+error rates on the validation data is: 0.8853
+Test data prediction finished after: 428.8025951385498
+error rates on the test data is: 0.8833
+
+    \end{Verbatim}
+
+    \hypertarget{comment}{%
+\subsubsection{Comment:}\label{comment}}
+
+The SVM with larger penalty takes longer but still does poorly in
+validation and training data. One of the problems in this model is that
+I did not scale the data in the first place, which might be crucial.
+Another issue is the choice of penalty, and more exploration is needed.
+However, as the model fitting and prediction is too time consuming, I
+cannot perform another experiment before deadline.
+
+As a comparison, difference in time between SVM and random forest is
+apparent. Random Forest fits and predicts much faster than SVM, while
+having quite high accuracy on MNIST data. Another advantage of Random
+Forest is that it does not have devastating effectm of overfitting, as
+in the case of SVM. In the previous experiments, we can see error rate
+can go up when max\_features is too big or min\_samples is too small,
+but the rate is still reasonably low.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
